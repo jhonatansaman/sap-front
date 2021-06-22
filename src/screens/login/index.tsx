@@ -13,6 +13,7 @@ import {
   BannerInfoText,
   BannerText,
   Input,
+  Button,
 } from './styles';
 import Banner from '../../assets/UIkit/images/banner-setic.jpg';
 
@@ -39,6 +40,7 @@ const Login: React.FC = () => (
         <LoginContent>
           <Input placeholder="idUFSC, Matrícula, E-mail, CPF, ou Passaporte" />
           <Input placeholder="Senha" />
+          <Button>Entrar</Button>
         </LoginContent>
       </LoginBox>
     </Content>

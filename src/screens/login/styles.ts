@@ -6,7 +6,6 @@ export const Container = styled.div`
   display: flex;
   background: ${colors.background.white};
   justify-content: center;
-  align-items: center;
 `;
 
 export const BannerSetic = styled.div`
@@ -23,6 +22,7 @@ export const LoginContent = styled.div`
 export const Content = styled.div`
   display: flex;
   flex-direction: row;
+  margin-top: 200px;
 `;
 export const LoginBox = styled.div`
   width: 400px;
@@ -75,4 +75,10 @@ export const Input = styled.input`
   margin-bottom: 20px;
   border-radius: 5px;
   padding: 10px;
+`;
+
+export const Button = styled.button`
+  background: linear-gradient(to bottom, #0088cc, #0044cc);
+  padding: 10px;
+  color: white;
 `;
