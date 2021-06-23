@@ -20,9 +20,11 @@ export const LoginContent = styled.div`
   flex-direction: column;
 `;
 export const Content = styled.div`
+  width: 961px;
+  height: 600px;
   display: flex;
-  flex-direction: row;
-  margin-top: 200px;
+  flex-direction: column;
+  margin-top: 100px;
 `;
 export const LoginBox = styled.div`
   width: 400px;
@@ -82,3 +84,7 @@ export const Button = styled.button`
   padding: 10px;
   color: white;
 `;
+
+export const ContentLeft = styled.div``;
+export const ContentRight = styled.div``;
+export const UFSCLogo = styled.img``;
