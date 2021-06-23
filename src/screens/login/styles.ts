@@ -3,9 +3,7 @@ import colors from '../../assets/UIkit/styles/colors';
 
 export const Container = styled.div`
   min-height: 100vh;
-  display: flex;
   background: ${colors.background.white};
-  justify-content: center;
 `;
 
 export const BannerSetic = styled.div`
@@ -24,7 +22,9 @@ export const Content = styled.div`
   height: 600px;
   display: flex;
   flex-direction: column;
-  margin-top: 100px;
+  margin-top: 50px;
+  display: flex;
+  justify-content: center;
 `;
 export const LoginBox = styled.div`
   width: 400px;
@@ -85,6 +85,46 @@ export const Button = styled.button`
   color: white;
 `;
 
+export const ContentHeader = styled.div`
+  display: flex;
+  flex: 1;
+  justify-content: space-between;
+  align-items: center;
+`;
 export const ContentLeft = styled.div``;
 export const ContentRight = styled.div``;
-export const UFSCLogo = styled.img``;
+export const ContentCenter = styled.div`
+  display: flex;
+  flex: 1;
+  flex-direction: row;
+`;
+export const UFSCLogo = styled.img`
+  width: 293px;
+  height: 64px;
+`;
+
+export const TitleLogin = styled.p`
+  font-size: 20px;
+  color: #606060;
+  margin-right: 40px;
+  font-weight: bold;
+`;
+
+export const Header = styled.div`
+  display: flex;
+  flex: 1;
+  height: 53px;
+  background: #606060;
+  justify-content: center;
+  align-items: center;
+`;
+
+export const Main = styled.div`
+  display: flex;
+  flex: 1;
+  justify-content: center;
+`;
+
+export const Title = styled.h3`
+  color: white;
+`;
