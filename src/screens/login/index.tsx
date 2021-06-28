@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, ChangeEvent } from 'react';
 import {
   Container,
   BannerSetic,
@@ -26,8 +26,24 @@ import {
 } from './styles';
 import Banner from '../../assets/UIkit/images/banner-setic.jpg';
 import Logo from '../../assets/UIkit/images/brasao_ufsc.png';
+import { AuthProps } from '../../types/apiResponse';
 
-const Login: React.FC = () => (
+const onChange = (
+    event: ChangeEvent<HTMLInputElement>, 
+    credentials: AuthProps, 
+    setCredentials: (params: AuthProps) => void
+  ) => {
+  const { name, value } = event.target;
+  setCredentials({...credentials, [name]: value})
+}
+
+const Login: React.FC = () => {
+  const [credentials, setCredentials] = useState<AuthProps>({
+    identificacao: '',
+    senha: ''
+  });
+
+  return (
   <Container>
     <Header>
       <Title>SPPEN - UFSC</Title>
@@ -38,7 +54,7 @@ const Login: React.FC = () => (
           <UFSCLogo src={Logo} />
           <TitleLogin>Sistema de Autenticação Centralizada</TitleLogin>
         </ContentHeader>
-        <ContentCenter style={{display: 'flex', flex: 1, flexDirection: 'row'}}>
+        <ContentCenter>
           <BannerBox>
             <BannerSetic>
               <ImageBox>
@@ -55,11 +71,18 @@ const Login: React.FC = () => (
               </BannerTextBox>
             </BannerSetic>
           </BannerBox>
-
           <LoginBox>
             <LoginContent>
-              <Input placeholder="idUFSC, Matrícula, E-mail, CPF, ou Passaporte" />
-              <Input placeholder="Senha" />
+              <Input 
+                placeholder="idUFSC, Matrícula, E-mail, CPF, ou Passaporte" 
+                name="identificacao"
+                onChange={(event) => onChange(event, credentials, setCredentials )}
+                />
+              <Input 
+                placeholder="Senha"
+                name="senha"
+                onChange={(event) => onChange(event, credentials, setCredentials)}
+              />
               <Button>Entrar</Button>
             </LoginContent>
           </LoginBox>
@@ -67,6 +90,7 @@ const Login: React.FC = () => (
       </Content>
     </Main>
   </Container>
-);
+  );
+}
 
 export default Login;
