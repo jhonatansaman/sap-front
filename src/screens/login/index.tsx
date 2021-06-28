@@ -27,6 +27,7 @@ import {
 import Banner from '../../assets/UIkit/images/banner-setic.jpg';
 import Logo from '../../assets/UIkit/images/brasao_ufsc.png';
 import { AuthProps } from '../../types/apiResponse';
+import { userService } from '../../services/user';
 
 const onChange = (
     event: ChangeEvent<HTMLInputElement>, 
@@ -35,6 +36,15 @@ const onChange = (
   ) => {
   const { name, value } = event.target;
   setCredentials({...credentials, [name]: value})
+}
+
+const onSubmit = async (credentials: AuthProps) => {
+  try {
+    await userService.auth(credentials);
+    alert('logado com sucesso');
+  } catch (error) {
+    alert('erro ao logar')
+  }
 }
 
 const Login: React.FC = () => {
@@ -76,14 +86,16 @@ const Login: React.FC = () => {
               <Input 
                 placeholder="idUFSC, Matrícula, E-mail, CPF, ou Passaporte" 
                 name="identificacao"
+                type="text"
                 onChange={(event) => onChange(event, credentials, setCredentials )}
                 />
               <Input 
                 placeholder="Senha"
                 name="senha"
+                type="password"
                 onChange={(event) => onChange(event, credentials, setCredentials)}
               />
-              <Button>Entrar</Button>
+              <Button onClick={() => onSubmit(credentials)}>Entrar</Button>
             </LoginContent>
           </LoginBox>
         </ContentCenter>
