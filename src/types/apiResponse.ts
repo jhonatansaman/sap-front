@@ -1,4 +1,4 @@
 export interface AuthProps {
-    identificacao: string;
-    senha: string;
+  identificacao: string;
+  senha: string;
 }
