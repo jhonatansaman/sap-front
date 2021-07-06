@@ -26,7 +26,11 @@ import {
   Title,
   TitleLogin,
   UFSCLogo,
+  AuthIcon,
 } from './styles';
+import IconKey from '../../assets/UIkit/images/ufsc.png';
+import {useHistory} from 'react-router-dom';
+import {History} from 'history';
 
 const onChange = (
   event: ChangeEvent<HTMLInputElement>,
@@ -37,20 +41,26 @@ const onChange = (
   setCredentials({...credentials, [name]: value});
 };
 
-const onSubmit = async (credentials: AuthProps) => {
+const onSubmit = async (credentials: AuthProps, history: History) => {
   try {
     const {data} = await userService.auth(credentials);
     if (data.erro) {
-      return alertService.error('Usuário ou senha inválidos');
+      return alertService.error('Usuário ou senha inválidos!');
     }
+
+    history.push('/home');
   } catch (error) {
     return alertService.error(error.response.data.message);
   }
 };
 
-const onKeyPress = (event: React.KeyboardEvent, credentials: AuthProps) => {
+const onKeyPress = (
+  event: React.KeyboardEvent,
+  credentials: AuthProps,
+  history: History,
+) => {
   if (event.key === 'Enter') {
-    onSubmit(credentials);
+    onSubmit(credentials, history);
   }
 };
 
@@ -59,11 +69,12 @@ const Login: React.FC = () => {
     identificacao: '',
     senha: '',
   });
+  const history = useHistory();
 
   return (
     <Container>
       <Header>
-        <Title>SPPEN - UFSC</Title>
+        <AuthIcon src={IconKey} /> <Title>SPPEN - UFSC</Title>
       </Header>
       <Main>
         <Content>
@@ -90,25 +101,37 @@ const Login: React.FC = () => {
             </BannerBox>
             <LoginBox>
               <LoginContent>
-                <Input
-                  placeholder="idUFSC, Matrícula, E-mail, CPF, ou Passaporte"
-                  name="identificacao"
-                  onKeyDown={event => onKeyPress(event, credentials)}
-                  type="text"
-                  onChange={event =>
-                    onChange(event, credentials, setCredentials)
-                  }
-                />
-                <Input
-                  placeholder="Senha"
-                  name="senha"
-                  type="password"
-                  onKeyDown={event => onKeyPress(event, credentials)}
-                  onChange={event =>
-                    onChange(event, credentials, setCredentials)
-                  }
-                />
-                <Button onClick={() => onSubmit(credentials)}>Entrar</Button>
+                <div
+                  style={{flex: 1, display: 'flex', flexDirection: 'column'}}>
+                  <Input
+                    placeholder="idUFSC, Matrícula, E-mail, CPF, ou Passaporte"
+                    name="identificacao"
+                    onKeyDown={event => onKeyPress(event, credentials, history)}
+                    type="text"
+                    onChange={event =>
+                      onChange(event, credentials, setCredentials)
+                    }
+                  />
+                  <Input
+                    placeholder="Senha"
+                    name="senha"
+                    type="password"
+                    onKeyDown={event => onKeyPress(event, credentials, history)}
+                    onChange={event =>
+                      onChange(event, credentials, setCredentials)
+                    }
+                  />
+                  <Button onClick={() => onSubmit(credentials, history)}>
+                    Entrar
+                  </Button>
+                </div>
+                <div
+                  style={{
+                    flex: 1,
+                    display: 'flex',
+                    width: '100%',
+                    alignItems: 'flex-end',
+                  }}></div>
               </LoginContent>
             </LoginBox>
           </ContentCenter>

@@ -3,7 +3,7 @@ import colors from '../../assets/UIkit/styles/colors';
 
 export const Container = styled.div`
   min-height: 100vh;
-  background: ${colors.background.white};
+  background: ${colors.Main.white};
 `;
 
 export const BannerSetic = styled.div`
@@ -16,13 +16,13 @@ export const LoginContent = styled.div`
   flex: 1;
   margin: 20px;
   flex-direction: column;
+  justify-content: space-between;
 `;
 export const Content = styled.div`
   width: 961px;
   height: 600px;
   display: flex;
   flex-direction: column;
-  margin-top: 50px;
   display: flex;
   justify-content: center;
 `;
@@ -32,6 +32,10 @@ export const LoginBox = styled.div`
   background: #efefef;
   display: flex;
   flex-direction: column;
+`;
+
+export const AuthIcon = styled.img`
+  margin-right: 10px;
 `;
 
 export const BannerBox = styled.div`
@@ -72,7 +76,7 @@ export const BannerText = styled.div`
 `;
 
 export const Input = styled.input`
-  background: ${colors.background.white};
+  background: ${colors.Main.white};
   border-color: transparent;
   margin-bottom: 20px;
   border-radius: 5px;
@@ -81,8 +85,11 @@ export const Input = styled.input`
 
 export const Button = styled.button`
   background: linear-gradient(to bottom, #0088cc, #0044cc);
-  padding: 10px;
+  height: 48px;
   color: white;
+  border-width: 0px;
+  border-radius: 5px;
+  width: 100%;
 `;
 
 export const ContentHeader = styled.div`
