@@ -1,0 +1,55 @@
+stages:
+  - build
+  - test
+  - deploy
+
+
+build-docker:
+  stage: build
+  image: docker:stable
+  script:
+    - docker login -u "$CI_REGISTRY_USER" -p "$CI_REGISTRY_PASSWORD" $CI_REGISTRY
+    - docker build --pull -t "$CI_REGISTRY_IMAGE:$CI_COMMIT_REF_SLUG" .
+    - docker push "$CI_REGISTRY_IMAGE:$CI_COMMIT_REF_SLUG"
+
+
+.test:
+  stage: test
+  image: $CI_REGISTRY_IMAGE:$CI_COMMIT_REF_SLUG
+
+
+#### DEPLOY
+#
+# Exige configuração no PORTAINER e GITLAB
+#
+# WEBHOOK_PORTAINER_HML e WEBHOOK_PORTAINER_PRO:
+#   Possui a URL para reiniciar o _service_ no portainer
+#   Variável configurada no GITLAB: PROJETO > Settings > CI/CD > Secret Variables
+#
+.call_portainer_webhook: &call_portainer_webhook
+  stage: deploy
+  image: curlimages/curl:7.69.1
+  variables:
+    GIT_STRATEGY: none
+
+portainer_HML:
+  <<: *call_portainer_webhook
+  only:
+    - develop
+  script:
+    - if [ "${WEBHOOK_PORTAINER_HML}" ]; then
+        curl -X POST "${WEBHOOK_PORTAINER_HML}";
+      else
+        echo "\$WEBHOOK_PORTAINER_HML não definida!" ; exit 1;
+      fi
+
+portainer_PRO:
+  <<: *call_portainer_webhook
+  only:
+    - master
+  script:
+    - if [ "${WEBHOOK_PORTAINER_PRO}" ]; then
+        curl -X POST "${WEBHOOK_PORTAINER_PRO}";
+      else
+        echo "\$WEBHOOK_PORTAINER_PRO não definida!" ; exit 1;
+      fi
