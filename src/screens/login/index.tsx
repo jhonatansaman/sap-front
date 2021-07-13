@@ -44,13 +44,14 @@ const onChange = (
 const onSubmit = async (credentials: AuthProps, history: History) => {
   try {
     const {data} = await userService.auth(credentials);
-    if (data.erro) {
+    if (data?.erro) {
       return alertService.error('Usuário ou senha inválidos!');
     }
 
+    localStorage.setItem('user', JSON.stringify(data));
     history.push('/home');
   } catch (error) {
-    return alertService.error(error.response.data.message);
+    return alertService.error(error?.response?.data?.message);
   }
 };
 
@@ -125,13 +126,6 @@ const Login: React.FC = () => {
                     Entrar
                   </Button>
                 </div>
-                <div
-                  style={{
-                    flex: 1,
-                    display: 'flex',
-                    width: '100%',
-                    alignItems: 'flex-end',
-                  }}></div>
               </LoginContent>
             </LoginBox>
           </ContentCenter>
