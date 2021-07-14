@@ -1,7 +1,8 @@
 import React from 'react';
 import Avatar from '../../UIkit/images/avatar.png';
-import {APIResponseRoles, Roles, SidebarProps, StateRoles} from './index.type';
+import {Roles, SidebarProps} from './index.type';
 import {
+  Bottom,
   Button,
   Container,
   Dropdown,
@@ -10,6 +11,7 @@ import {
   Image,
   ImageBox,
   Link,
+  Middle,
   Top,
   User,
 } from './styles';
@@ -25,14 +27,18 @@ const Sidebar: React.FC<SidebarProps> = ({data}) => (
           <Image src={Avatar} />
         </ImageBox>
       </Top>
-      <User>Jhonatan Saman</User>
-      <Dropdown>
-        <Button>
-          {data?.papeis?.[0]?.nome}
-          <i className="fa fa-caret-down"></i>
-        </Button>
-        <DropdownContent>{renderRoles(data?.papeis)}</DropdownContent>
-      </Dropdown>
+      <Middle>
+        <User>Jhonatan Saman</User>
+      </Middle>
+      <Bottom>
+        <Dropdown>
+          <Button>
+            {data?.papeis?.[0]?.nome}
+            <i className="fa fa-caret-down"></i>
+          </Button>
+          <DropdownContent>{renderRoles(data?.papeis)}</DropdownContent>
+        </Dropdown>
+      </Bottom>
     </Header>
   </Container>
 );
