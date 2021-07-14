@@ -18,12 +18,14 @@ export const Header = styled.div`
   padding-left: 16px;
   justify-content: center;
   flex-direction: column;
+  display: flex;
 `;
 
 export const Top = styled.div`
   display: flex;
-  flex: 1;
-  align-items: center;
+  flex: 2;
+  flex-direction: column;
+  justify-content: flex-end;
 `;
 
 export const Image = styled.img`
@@ -54,10 +56,9 @@ export const Dropdown = styled.div`
   border: none;
   outline: none;
   color: white;
-  padding: 14px 16px;
-  background-color: inherit;
   font-family: inherit;
   margin: 0;
+  padding: 0px;
 `;
 
 export const DropdownContent = styled.div`
@@ -81,6 +82,7 @@ export const Button = styled.button`
   outline: none;
   color: black;
   background: white;
+  padding: 0px;
   font-family: inherit;
 `;
 
@@ -90,4 +92,14 @@ export const Link = styled.a`
   text-decoration: none;
   display: block;
   text-align: left;
+`;
+
+export const Middle = styled.div`
+  display: flex;
+  flex: 0.5;
+`;
+
+export const Bottom = styled.div`
+  display: flex;
+  flex: 0.5;
 `;
