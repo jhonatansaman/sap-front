@@ -15,7 +15,7 @@ export const Header = styled.div`
   height: 144px;
   border-bottom: 1px solid;
   border-color: ${colors.Main.divider};
-  padding-left: 16px;
+  padding: 16px;
   justify-content: center;
   flex-direction: column;
   display: flex;
@@ -59,21 +59,7 @@ export const Dropdown = styled.div`
   font-family: inherit;
   margin: 0;
   padding: 0px;
-`;
-
-export const DropdownContent = styled.div`
-  display: none;
-  position: absolute;
-  background-color: #f9f9f9;
-  min-width: 160px;
-  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
-  z-index: 1;
-
-  ${Dropdown}:hover & {
-    display: block;
-    display: flex;
-    flex-direction: column;
-  }
+  cursor: pointer;
 `;
 
 export const Button = styled.button`
@@ -84,6 +70,7 @@ export const Button = styled.button`
   background: white;
   padding: 0px;
   font-family: inherit;
+  cursor: pointer;
 `;
 
 export const Link = styled.a`
@@ -102,4 +89,22 @@ export const Middle = styled.div`
 export const Bottom = styled.div`
   display: flex;
   flex: 0.5;
+  justify-content: space-between;
+  cursor: pointer;
+`;
+
+export const DropdownContent = styled.div`
+  display: none;
+  position: absolute;
+  background-color: #f9f9f9;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+  z-index: 1;
+
+  ${Bottom}:hover & {
+    display: block;
+    display: flex;
+    flex-direction: column;
+    cursor: pointer;
+  }
 `;
