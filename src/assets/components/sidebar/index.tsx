@@ -15,6 +15,7 @@ import {
   Top,
   User,
 } from './styles';
+import Arrow from '../../UIkit/images/arrow-drop-down.png';
 
 const renderRoles = (roles: Array<Roles> | undefined) =>
   roles?.map(role => <Link href="#">{role.nome}</Link>);
@@ -32,12 +33,10 @@ const Sidebar: React.FC<SidebarProps> = ({data}) => (
       </Middle>
       <Bottom>
         <Dropdown>
-          <Button>
-            {data?.papeis?.[0]?.nome}
-            <i className="fa fa-caret-down"></i>
-          </Button>
+          <Button>{data?.papeis?.[0]?.nome}</Button>
           <DropdownContent>{renderRoles(data?.papeis)}</DropdownContent>
         </Dropdown>
+        <img src={Arrow} />
       </Bottom>
     </Header>
   </Container>
