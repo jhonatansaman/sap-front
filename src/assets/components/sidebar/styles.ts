@@ -108,3 +108,30 @@ export const DropdownContent = styled.div`
     cursor: pointer;
   }
 `;
+
+export const ContainerMenu = styled.div`
+  height: 40px;
+  /* background: ${colors.Main.primary}; */
+  display: flex;
+  margin: 8px;
+  border-radius: 4px;
+  cursor: pointer;
+`;
+
+export const Left = styled.div`
+  display: flex;
+  flex: 0.5;
+  align-items: center;
+  justify-content: center;
+`;
+
+export const Right = styled.div`
+  display: flex;
+  flex: 1;
+  align-items: center;
+`;
+
+export const IconBox = styled.div`
+  height: 25px;
+  width: 25px;
+`;

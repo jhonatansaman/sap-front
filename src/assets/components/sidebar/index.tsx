@@ -14,8 +14,32 @@ import {
   Middle,
   Top,
   User,
+  ContainerMenu,
+  Left,
+  Right,
+  IconBox,
 } from './styles';
 import Arrow from '../../UIkit/images/arrow-drop-down.png';
+import IconMessage from '../../UIkit/images/ico-message.png';
+const menus = [
+  {label: 'Mensagens', icon: IconMessage},
+  {label: 'Cadastros', icon: IconMessage},
+  {label: 'Relatórios', icon: IconMessage},
+  {label: 'Planos de Ensino', icon: IconMessage},
+  {label: 'Atualizar Dados', icon: IconMessage},
+];
+
+const renderMenus = () =>
+  menus.map(menu => (
+    <ContainerMenu>
+      <Left>
+        <IconBox>
+          <Image src={menu.icon} />
+        </IconBox>
+      </Left>
+      <Right>{menu.label}</Right>
+    </ContainerMenu>
+  ));
 
 const renderRoles = (roles: Array<Roles> | undefined) =>
   roles?.map(role => <Link href="#">{role.nome}</Link>);
@@ -39,6 +63,7 @@ const Sidebar: React.FC<SidebarProps> = ({data}) => (
         <img src={Arrow} />
       </Bottom>
     </Header>
+    {renderMenus()}
   </Container>
 );
 export default Sidebar;
