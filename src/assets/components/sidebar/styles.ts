@@ -121,9 +121,8 @@ export const Menu = styled.p`
 
 export const ContainerMenu = styled.div`
   height: 40px;
-  /* background: ${colors.Main.primary}; */
   display: flex;
-  margin: 8px;
+  margin: 8px 16px;
   border-radius: 4px;
   cursor: pointer;
   &:hover {
@@ -138,7 +137,7 @@ export const Left = styled.div`
   display: flex;
   flex: 0.5;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-start;
 `;
 
 export const Right = styled.div`
