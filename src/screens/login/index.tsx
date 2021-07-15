@@ -45,8 +45,6 @@ const onSubmit = async (credentials: AuthProps, history: History) => {
   try {
     const {data} = await userService.auth(credentials);
 
-    console.log(data);
-
     if (data?.user?.erro) {
       return alertService.error('Usuário ou senha inválidos!');
     }
