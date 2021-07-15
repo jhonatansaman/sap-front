@@ -18,26 +18,30 @@ import {
   Left,
   Right,
   IconBox,
+  Menu,
 } from './styles';
 import Arrow from '../../UIkit/images/arrow-drop-down.png';
 import IconMessage from '../../UIkit/images/ico-message.png';
+import IconCadaster from '../../UIkit/images/ico-cadaster.png';
 const menus = [
   {label: 'Mensagens', icon: IconMessage},
-  {label: 'Cadastros', icon: IconMessage},
+  {label: 'Cadastros', icon: IconCadaster},
   {label: 'Relatórios', icon: IconMessage},
   {label: 'Planos de Ensino', icon: IconMessage},
   {label: 'Atualizar Dados', icon: IconMessage},
 ];
 
 const renderMenus = () =>
-  menus.map(menu => (
-    <ContainerMenu>
+  menus.map((menu, index) => (
+    <ContainerMenu key={index.toString()}>
       <Left>
         <IconBox>
           <Image src={menu.icon} />
         </IconBox>
       </Left>
-      <Right>{menu.label}</Right>
+      <Right>
+        <Menu>{menu.label}</Menu>
+      </Right>
     </ContainerMenu>
   ));
 

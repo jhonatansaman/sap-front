@@ -109,6 +109,16 @@ export const DropdownContent = styled.div`
   }
 `;
 
+export const Menu = styled.p`
+  /* font-family: Roboto; */
+  font-style: normal;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 21px;
+  letter-spacing: 0.1px;
+  color: ${colors.Primary.black};
+`;
+
 export const ContainerMenu = styled.div`
   height: 40px;
   /* background: ${colors.Main.primary}; */
@@ -116,6 +126,12 @@ export const ContainerMenu = styled.div`
   margin: 8px;
   border-radius: 4px;
   cursor: pointer;
+  &:hover {
+    background: ${colors.Main.primary};
+  }
+  &:hover ${Menu} {
+    color: ${colors.Main.primary500};
+  }
 `;
 
 export const Left = styled.div`
