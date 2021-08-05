@@ -50,7 +50,7 @@ const onSubmit = async (credentials: AuthProps, history: History) => {
     }
 
     localStorage.setItem('user', JSON.stringify(data));
-    history.push('/home');
+    history.push('/main');
   } catch (error) {
     return alertService.error(error?.response?.data?.message);
   }
