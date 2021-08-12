@@ -1,0 +1,31 @@
+{
+    "git.confirmSync": false,
+    "javascript.updateImportsOnFileMove.enabled": "always",
+    "git.enableSmartCommit": true,
+    "workbench.colorTheme": "Dracula",
+    "editor.minimap.enabled": false,
+    "terminal.integrated.tabs.enabled": true,
+    "explorer.confirmDragAndDrop": false,
+    "editor.codeActionsOnSave": {
+        "source.fixAll.eslint": true
+    },
+    "diffEditor.ignoreTrimWhitespace": false,
+    "workbench.iconTheme": "material-icon-theme",
+    "extensions.ignoreRecommendations": true,
+    "editor.tokenColorCustomizations": null,
+    "[typescript]": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode"
+    },
+    "[typescriptreact]": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode"
+    },
+    "[javascriptreact]": {
+        "editor.defaultFormatter": "vscode.typescript-language-features"
+    },
+    "[javascript]": {
+        "editor.defaultFormatter": "vscode.typescript-language-features"
+    },
+    "editor.formatOnSave": true,
+    "typescript.updateImportsOnFileMove.enabled": "always",
+
+}

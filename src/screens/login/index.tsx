@@ -126,6 +126,7 @@ const Login: React.FC = () => {
                       onChange(event, credentials, setCredentials)
                     }
                   />
+
                   <Button onClick={() => onSubmit(credentials, history)}>
                     Entrar
                   </Button>
