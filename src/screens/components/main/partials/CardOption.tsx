@@ -1,5 +1,5 @@
-import {History} from 'history';
 import React from 'react';
+import {History} from 'history';
 import {useHistory} from 'react-router-dom';
 import {HoverState, SystemsHover} from '../../../containers/main/index.type';
 import {CardOptionProps} from '../index.type';
@@ -14,7 +14,7 @@ import {
 
 const renderItems = (hover: HoverState, items: any, history: History) =>
   items.map((item: any) => (
-    <ContainerCardOption onClick={() => history.push('/home')}>
+    <ContainerCardOption onClick={() => history.push(item.route)}>
       <ImageBox>
         <Image src={item.iconDisabled} />
       </ImageBox>

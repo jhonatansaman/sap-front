@@ -14,6 +14,7 @@ const items = [
     iconActived: BookEnabled,
     iconDisabled: BookDisabled,
     type: 'teachingPlanning',
+    route: '/home',
   },
   {
     title: 'Diário de Classe',
@@ -21,6 +22,7 @@ const items = [
     iconActived: ClassDiary,
     iconDisabled: ClassDiary,
     type: null,
+    route: '/home',
   },
   {
     title: 'Planejamento Semestral',
@@ -28,6 +30,7 @@ const items = [
     iconActived: Planning,
     iconDisabled: Planning,
     type: null,
+    route: '/home',
   },
   {
     title: 'Gerar Cadastros',
@@ -35,6 +38,7 @@ const items = [
     iconActived: Cadaster,
     iconDisabled: Cadaster,
     type: null,
+    route: '/cadaster',
   },
 ];
 

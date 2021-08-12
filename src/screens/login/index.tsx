@@ -44,12 +44,15 @@ const onChange = (
 const onSubmit = async (credentials: AuthProps, history: History) => {
   try {
     const {data} = await userService.auth(credentials);
+    const roles = await userService.get(data?.accessToken);
 
     if (data?.user?.erro) {
       return alertService.error('Usuário ou senha inválidos!');
     }
 
     localStorage.setItem('user', JSON.stringify(data));
+    localStorage.setItem('roles', JSON.stringify(roles.data));
+
     history.push('/main');
   } catch (error) {
     return alertService.error(error?.response?.data?.message);

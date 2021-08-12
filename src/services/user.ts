@@ -13,6 +13,10 @@ class User {
   getUserInfo() {
     return JSON.parse(localStorage.getItem('user') || '{}');
   }
+
+  getRoles() {
+    return JSON.parse(localStorage.getItem('roles') || '{}');
+  }
 }
 
 export const userService = new User();

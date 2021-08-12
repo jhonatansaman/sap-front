@@ -4,6 +4,7 @@ import Login from '../screens/login';
 import Home from '../screens/home';
 import Main from '../screens/containers/main';
 import GlobalStyle from '../globalStyles';
+import CadasterContainer from '../screens/containers/cadaster';
 const Routes: React.FC = () => {
   return (
     <>
@@ -17,6 +18,9 @@ const Routes: React.FC = () => {
           </Route>
           <Route path="/home">
             <Home />
+          </Route>
+          <Route path="/cadaster">
+            <CadasterContainer />
           </Route>
         </Switch>
       </Router>
