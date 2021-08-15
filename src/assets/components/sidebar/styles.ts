@@ -49,6 +49,7 @@ export const User = styled.p`
   line-height: 30px;
   letter-spacing: 0.15px;
   color: ${colors.Primary.black};
+  text-transform: capitalize;
 `;
 
 export const Dropdown = styled.div`

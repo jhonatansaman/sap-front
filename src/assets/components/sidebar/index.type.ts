@@ -28,4 +28,11 @@ export interface StateRoles {
   data: APIResponseRoles | null;
 }
 
-export interface SidebarProps extends StateRoles {}
+export interface MenuSidebar {
+  label: string;
+  icon: any;
+}
+export interface SidebarProps extends StateRoles {
+  name: string;
+  routes: Array<MenuSidebar>;
+}

@@ -1,38 +1,30 @@
 import React from 'react';
+import {capitalize} from '../../../utils/capitalize';
+import Arrow from '../../UIkit/images/arrow-drop-down.png';
 import Avatar from '../../UIkit/images/avatar.png';
-import {Roles, SidebarProps} from './index.type';
+import {MenuSidebar, Roles, SidebarProps} from './index.type';
 import {
   Bottom,
   Button,
   Container,
+  ContainerMenu,
   Dropdown,
   DropdownContent,
   Header,
+  IconBox,
   Image,
   ImageBox,
+  Left,
   Link,
+  Menu,
   Middle,
+  Right,
   Top,
   User,
-  ContainerMenu,
-  Left,
-  Right,
-  IconBox,
-  Menu,
 } from './styles';
-import Arrow from '../../UIkit/images/arrow-drop-down.png';
-import IconMessage from '../../UIkit/images/ico-message.png';
-import IconCadaster from '../../UIkit/images/ico-cadaster.png';
-const menus = [
-  {label: 'Mensagens', icon: IconMessage},
-  {label: 'Cadastros', icon: IconCadaster},
-  {label: 'Relatórios', icon: IconMessage},
-  {label: 'Planos de Ensino', icon: IconMessage},
-  {label: 'Atualizar Dados', icon: IconMessage},
-];
 
-const renderMenus = () =>
-  menus.map((menu, index) => (
+const renderMenus = (routes: Array<MenuSidebar>) =>
+  routes?.map((menu, index) => (
     <ContainerMenu key={index.toString()}>
       <Left>
         <IconBox>
@@ -48,7 +40,7 @@ const renderMenus = () =>
 const renderRoles = (roles: Array<Roles> | undefined) =>
   roles?.map(role => <Link href="#">{role.nome}</Link>);
 
-const Sidebar: React.FC<SidebarProps> = ({data}) => (
+const Sidebar: React.FC<SidebarProps> = ({name, data, routes}) => (
   <Container>
     <Header>
       <Top>
@@ -57,7 +49,7 @@ const Sidebar: React.FC<SidebarProps> = ({data}) => (
         </ImageBox>
       </Top>
       <Middle>
-        <User>Jhonatan Saman</User>
+        <User>{capitalize(name)}</User>
       </Middle>
       <Bottom>
         <Dropdown>
@@ -67,7 +59,7 @@ const Sidebar: React.FC<SidebarProps> = ({data}) => (
         <img src={Arrow} />
       </Bottom>
     </Header>
-    {renderMenus()}
+    {renderMenus(routes)}
   </Container>
 );
 export default Sidebar;

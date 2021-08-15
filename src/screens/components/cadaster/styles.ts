@@ -9,7 +9,6 @@ export const Container = styled.div`
 
 export const Content = styled.div`
   flex: 1;
-  padding: 30px;
 `;
 
 export const Line = styled.div`
@@ -18,8 +17,14 @@ export const Line = styled.div`
   justify-content: space-between;
 `;
 
-export const InputBox = styled.div`
-  width: 40%;
+export const MainContent = styled.div`
+  padding: 10px;
 `;
 
-export const Label = styled.label``;
+export const InputBox = styled.div`
+  width: 45%;
+`;
+
+export const Label = styled.label`
+  font-size: 13px;
+`;
