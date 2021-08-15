@@ -8,6 +8,7 @@ const colors = {
   },
   Primary: {
     black: 'rgba(0, 0, 0, 0.87)',
+    blue: 'rgba(33, 150 , 243)',
   },
 };
 
