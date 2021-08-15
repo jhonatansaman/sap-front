@@ -5,14 +5,16 @@ import Input from '../../../assets/components/input';
 import Sidebar from '../../../assets/components/sidebar';
 import {StateRoles} from '../../../assets/components/sidebar/index.type';
 import {userService} from '../../../services/user';
+import {CadasterProps} from './index.type';
 import {Container, Content, Line, InputBox, MainContent, Label} from './styles';
 
-const Cadaster: React.FC = () => {
+const {user}: any = userService.getUserInfo();
+const Cadaster: React.FC<CadasterProps> = ({routes}) => {
   const [roles] = useState<StateRoles>({data: userService.getRoles()});
 
   return (
     <Container>
-      <Sidebar name="Teste" data={roles.data} routes={[]} />
+      <Sidebar name={user?.nome} data={roles.data} routes={routes} />
       <Content>
         <Header />
         <MainContent>

@@ -1,7 +1,9 @@
 import React from 'react';
-import Sidebar from '../../../assets/components/sidebar';
+import IconMessage from '../../../assets/UIkit/images/ico-message.png';
 import Cadaster from '../../components/cadaster';
 
-const CadasterContainer: React.FC = () => <Cadaster />;
+const menus = [{label: 'Membro do colegiado', icon: IconMessage}];
+
+const CadasterContainer: React.FC = () => <Cadaster routes={menus} />;
 
 export default CadasterContainer;
