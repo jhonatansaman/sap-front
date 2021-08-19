@@ -1,0 +1,117 @@
+export interface Departments {
+  codigo: string;
+  nome: string;
+  centro: string;
+  chefeDepartamento: {
+    id: number;
+    serpro: number;
+    serpro2: number;
+    siape: number;
+    nome: string;
+    localizacaoFisica: {
+      id: number;
+      centro: {
+        id: number;
+        nome: string;
+        sigla: string;
+        tipo: {
+          id: number;
+          nome: string;
+        };
+      };
+      nome: string;
+      sigla: string;
+      ativo: string;
+      suplenciaChefia: {
+        id: number;
+      };
+    };
+    localizacao: {
+      id: number;
+      centro: {
+        id: number;
+        nome: string;
+        sigla: string;
+        tipo: {
+          id: number;
+          nome: string;
+        };
+      };
+      nome: string;
+      sigla: string;
+      ativo: string;
+      suplenciaChefia: {
+        id: number;
+      };
+    };
+    setor: {
+      id: number;
+      centro: {
+        id: number;
+        nome: string;
+        sigla: string;
+        tipo: {
+          id: number;
+          nome: string;
+        };
+      };
+      nome: string;
+      sigla: string;
+      ativo: string;
+      suplenciaChefia: {
+        id: number;
+      };
+    };
+    cargo: {
+      id: number;
+      nome: string;
+      grauDocencia: number;
+    };
+    situacao: {
+      id: number;
+      nome: string;
+    };
+    dataNascimento: string;
+    tipo: string;
+    codigoReferencia: string;
+    cpf: number;
+    email: string;
+    emailCAGR: {
+      serpro: number;
+      email: string;
+      curriculoLattes: string;
+    };
+  };
+  dataInicioMandato: string;
+  dataFimMandato: string;
+  telefone: string;
+  situacao: {
+    id: number;
+  };
+  email: string;
+  observacao: string;
+  website: string;
+  codigoDepartamentoFolha: number;
+}
+
+export interface Teachers {
+  matricula: number;
+  nome: string;
+  senhaHash: string;
+  serpro: number;
+  serpro2: number;
+  siape: number;
+  lotacao: string;
+  email: string;
+  curriculoLattes: string;
+  ativo: boolean;
+  sistema: string;
+}
+
+export interface DepartmentsState {
+  data: Array<Departments>;
+}
+
+export interface TearchersState {
+  data: Array<Teachers>;
+}
