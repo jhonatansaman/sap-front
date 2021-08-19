@@ -3,7 +3,7 @@ import {Container, Text} from './styles';
 
 const Header: React.FC = () => (
   <Container>
-    <Text>Teste</Text>
+    <Text>Membro do Colegiado</Text>
   </Container>
 );
 

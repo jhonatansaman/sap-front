@@ -28,3 +28,10 @@ export const InputBox = styled.div`
 export const Label = styled.label`
   font-size: 13px;
 `;
+
+export const Select = styled.select`
+  width: 100%;
+  height: 44px;
+  background: ${colors.Main.white};
+  border: 1px solid ${colors.Main.divider};
+`;
