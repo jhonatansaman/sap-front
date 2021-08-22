@@ -1,6 +1,7 @@
 import React from 'react';
 import IconMessage from '../../../assets/UIkit/images/ico-message.png';
 import IconCollegiate from '../../../assets/UIkit/icons/ico-collegiate.svg';
+import IconCollegiateActived from '../../../assets/UIkit/icons/ico-collegiate_actived.svg';
 import {alertService} from '../../../services/alert';
 import {cagrService} from '../../../services/cagr';
 import {getCurrentSemester} from '../../../utils/currentSemester';
@@ -13,7 +14,9 @@ import {
   TearchersState,
 } from './index.type';
 
-const menus = [{label: 'Colegiado', icon: IconCollegiate}];
+const menus = [
+  {label: 'Colegiado', icon: IconCollegiate, iconAtived: IconCollegiateActived},
+];
 const currentSemester = getCurrentSemester();
 
 const getInitialData = async (
@@ -29,10 +32,13 @@ const getInitialDataByDepartment = async (
   department: string | null,
   setTeachers: (data: TearchersState) => void,
   setDisciplines: (data: DisciplinesState) => void,
+  setIsShownModal: (param: boolean) => void,
 ) => {
   try {
+    setIsShownModal(true);
     const {data} = await cagrService.getTeachersByDepartment(department);
 
+    setTeachers({data});
     if (department) {
       const disciplines = await cagrService.getDisciplinesByDepartment(
         department.split('/')?.[0],
@@ -41,7 +47,7 @@ const getInitialDataByDepartment = async (
       setDisciplines({data: disciplines?.data});
     }
 
-    setTeachers({data});
+    setIsShownModal(false);
   } catch (error) {
     alertService.error('Erro ao buscar disciplina');
   }
@@ -60,13 +66,19 @@ const CadasterContainer: React.FC = () => {
   const [departmentSelected, setDepartmentSelected] = React.useState<
     string | null
   >(null);
+  const [isShownModal, setIsShownModal] = React.useState<boolean>(false);
 
   React.useEffect(() => {
     getInitialData(setDepartments);
   }, []);
 
   React.useEffect(() => {
-    getInitialDataByDepartment(departmentSelected, setTeachers, setDisciplines);
+    getInitialDataByDepartment(
+      departmentSelected,
+      setTeachers,
+      setDisciplines,
+      setIsShownModal,
+    );
   }, [departmentSelected]);
 
   return (
@@ -76,6 +88,7 @@ const CadasterContainer: React.FC = () => {
       teachers={teachers?.data}
       disciplines={disciplines?.data}
       onChangeDepartment={(param: string) => setDepartmentSelected(param)}
+      isShownModal={isShownModal}
     />
   );
 };

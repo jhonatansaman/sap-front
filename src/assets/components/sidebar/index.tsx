@@ -59,28 +59,8 @@ const Sidebar: React.FC<SidebarProps> = ({user, data, routes}) => (
           <Email>{user.email}</Email>
         </UserNameBox>
       </UserBox>
-
       {renderMenus(routes)}
     </Content>
-
-    {/* <Header>
-      <Top>
-        <ImageBox>
-          <Image src={Avatar} />
-        </ImageBox>
-      </Top>
-      <Middle>
-        <User>{capitalize(name)}</User>
-      </Middle>
-      <Bottom>
-        <Dropdown>
-          <Button>{data?.papeis?.[0]?.nome}</Button>
-          <DropdownContent>{renderRoles(data?.papeis)}</DropdownContent>
-        </Dropdown>
-        <img src={Arrow} />
-      </Bottom>
-    </Header> */}
-    {/* {renderMenus(routes)} */}
   </Container>
 );
 export default Sidebar;

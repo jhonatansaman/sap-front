@@ -1,44 +1,20 @@
 import React from 'react';
-import {Container, Th, Td, Tr} from './styles';
+import {TableProps} from './index.type';
+import {Table, TableRow, Th, HeaderBox, Divider} from './styles';
 
-const Head = ({keys, head}: {keys: any; head: any}) => {
-  const tableHead = head || {};
+const renderHeader = (headers: Array<string>) =>
+  headers?.map(title => <Th>{title}</Th>);
+
+// const renderRows = (rows: any) =>
+//   rows?.map(row => <td>{}</td>)
+
+const TableComponent: React.FC<TableProps> = ({tableHeaders, renderRows}) => {
   return (
-    <thead>
-      <Tr>
-        {keys.map((key: any) => (
-          <Th key={key}>{tableHead[key] || key}</Th>
-        ))}
-      </Tr>
-    </thead>
+    <Table>
+      <TableRow width={100}>{renderHeader(tableHeaders)}</TableRow>
+      {renderRows}
+    </Table>
   );
 };
 
-const Row = ({record}: {record: any}) => {
-  const keys = Object.keys(record);
-  return (
-    <Tr key={record.id}>
-      {keys.map(key => (
-        <Td key={key}>{record[key]}</Td>
-      ))}
-    </Tr>
-  );
-};
-
-const Table = ({data, head}: {data: any; head: any}) => {
-  const keys = Object.keys(data[0]);
-
-  return (
-    <Container>
-      <Head keys={keys} head={head} />
-
-      <tbody>
-        {data.map((record: any) => (
-          <Row record={record}></Row>
-        ))}
-      </tbody>
-    </Container>
-  );
-};
-
-export default Table;
+export default TableComponent;

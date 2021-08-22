@@ -11,4 +11,5 @@ export interface CadasterProps {
   teachers: Array<Teachers>;
   disciplines: Array<Disciplines>;
   onChangeDepartment: (param: string) => void;
+  isShownModal: boolean;
 }

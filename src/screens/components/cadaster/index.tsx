@@ -1,8 +1,11 @@
 import React, {useState} from 'react';
 import MainCard from '../../../assets/components/card';
 import Header from '../../../assets/components/header';
+import Modal from '../../../assets/components/modal';
 import Sidebar from '../../../assets/components/sidebar';
 import {StateRoles} from '../../../assets/components/sidebar/index.type';
+import Table from '../../../assets/components/table';
+import {TableRow, TD, Th} from '../../../assets/components/table/styles';
 import {userService} from '../../../services/user';
 import {
   Departments,
@@ -20,6 +23,9 @@ import {
   Select,
 } from './styles';
 
+const HEADERS = ['Código', 'Disciplina', 'Fase'];
+const SIZE_TD = 100 / HEADERS.length;
+
 const renderDepartments = (departments: Array<Departments>) =>
   departments?.map(department => (
     <option value={department.chefeDepartamento.localizacao.sigla}>
@@ -33,7 +39,15 @@ const renderTeachers = (teachers: Array<Teachers>) =>
   ));
 
 const renderDisciplines = (disciplines: Array<Disciplines>) =>
-  disciplines?.map(discipline => <ul>{discipline.nomeDisciplina}</ul>);
+  disciplines?.map(discipline => (
+    <>
+      <TableRow>
+        <TD width={SIZE_TD}>{discipline.codigoDisciplina}</TD>
+        <TD width={SIZE_TD}>{discipline.nomeDisciplina}</TD>
+        <TD width={SIZE_TD}>{discipline.codigoTurma}</TD>
+      </TableRow>
+    </>
+  ));
 
 const {user}: any = userService.getUserInfo();
 
@@ -43,6 +57,7 @@ const Cadaster: React.FC<CadasterProps> = ({
   teachers,
   disciplines,
   onChangeDepartment,
+  isShownModal,
 }) => {
   const [roles] = useState<StateRoles>({data: userService.getRoles()});
 
@@ -73,10 +88,14 @@ const Cadaster: React.FC<CadasterProps> = ({
         </MainContent>
         <MainContent>
           <MainCard>
-            <li>{renderDisciplines(disciplines)}</li>
+            <Table
+              tableHeaders={HEADERS}
+              renderRows={renderDisciplines(disciplines)}
+            />
           </MainCard>
         </MainContent>
       </Content>
+      {isShownModal && <Modal />}
     </Container>
   );
 };

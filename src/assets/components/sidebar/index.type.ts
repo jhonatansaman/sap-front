@@ -49,6 +49,7 @@ export interface StateRoles {
 export interface MenuSidebar {
   label: string;
   icon: any;
+  iconActived?: any;
 }
 export interface SidebarProps extends StateRoles {
   user: User;

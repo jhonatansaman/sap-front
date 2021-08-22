@@ -11,6 +11,7 @@ const colors = {
     blue: '#109CF1',
     gray: '#90A0B7',
     darkBlue: '#334D6E',
+    table_gray: '#707683',
   },
 };
 
