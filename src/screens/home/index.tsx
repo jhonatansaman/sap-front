@@ -32,7 +32,7 @@ const Home: React.FC = () => {
   console.log(user);
   return (
     <Container>
-      <Sidebar name={user?.nome} data={roles.data} routes={menus} />
+      <Sidebar user={user} data={roles.data} routes={menus} />
     </Container>
   );
 };

@@ -21,28 +21,49 @@ import {
   Right,
   Top,
   User,
+  TitleBox,
+  Title,
+  Content,
+  UserBox,
+  UserName,
+  UserNameBox,
+  Email,
 } from './styles';
 
 const renderMenus = (routes: Array<MenuSidebar>) =>
   routes?.map((menu, index) => (
     <ContainerMenu key={index.toString()}>
-      <Left>
-        <IconBox>
-          <Image src={menu.icon} />
-        </IconBox>
-      </Left>
-      <Right>
-        <Menu>{menu.label}</Menu>
-      </Right>
+      <IconBox>
+        <Image src={menu.icon} />
+      </IconBox>
+      <Menu>{menu.label}</Menu>
     </ContainerMenu>
   ));
 
 const renderRoles = (roles: Array<Roles> | undefined) =>
   roles?.map(role => <Link href="#">{role.nome}</Link>);
 
-const Sidebar: React.FC<SidebarProps> = ({name, data, routes}) => (
+const Sidebar: React.FC<SidebarProps> = ({user, data, routes}) => (
   <Container>
-    <Header>
+    <TitleBox>
+      <Title>UFSC - Cadastros</Title>
+    </TitleBox>
+
+    <Content>
+      <UserBox>
+        <ImageBox>
+          <Image src="https://w7.pngwing.com/pngs/340/946/png-transparent-avatar-user-computer-icons-software-developer-avatar-child-face-heroes.png" />
+        </ImageBox>
+        <UserNameBox>
+          <UserName>{capitalize(user.nome)}</UserName>
+          <Email>{user.email}</Email>
+        </UserNameBox>
+      </UserBox>
+
+      {renderMenus(routes)}
+    </Content>
+
+    {/* <Header>
       <Top>
         <ImageBox>
           <Image src={Avatar} />
@@ -58,8 +79,8 @@ const Sidebar: React.FC<SidebarProps> = ({name, data, routes}) => (
         </Dropdown>
         <img src={Arrow} />
       </Bottom>
-    </Header>
-    {renderMenus(routes)}
+    </Header> */}
+    {/* {renderMenus(routes)} */}
   </Container>
 );
 export default Sidebar;

@@ -31,14 +31,14 @@ export const Top = styled.div`
 export const Image = styled.img`
   width: 100%;
   height: 100%;
-  border-radius: 16px;
+  border-radius: 23px;
   object-fit: cover;
 `;
 
 export const ImageBox = styled.div`
-  height: 36px;
-  width: 36px;
-  border-radius: 18px;
+  height: 46px;
+  width: 46px;
+  border-radius: 23px;
 `;
 
 export const User = styled.p`
@@ -111,21 +111,22 @@ export const DropdownContent = styled.div`
 `;
 
 export const Menu = styled.p`
-  /* font-family: Roboto; */
+  font-family: Poppins;
   font-style: normal;
   font-weight: 500;
-  font-size: 14px;
-  line-height: 21px;
-  letter-spacing: 0.1px;
-  color: ${colors.Primary.black};
+  font-size: 13px;
+  line-height: 19px;
+  color: ${colors.Primary.darkBlue};
+  letter-spacing: 0.01em;
+  margin-left: 15px;
 `;
 
 export const ContainerMenu = styled.div`
   height: 40px;
   display: flex;
-  margin: 8px 16px;
   border-radius: 4px;
   cursor: pointer;
+  align-items: center;
   &:hover {
     background: ${colors.Main.primary};
   }
@@ -150,4 +151,60 @@ export const Right = styled.div`
 export const IconBox = styled.div`
   height: 25px;
   width: 25px;
+`;
+
+export const TitleBox = styled.div`
+  height: 60px;
+  border-bottom: 1px solid ${colors.Main.divider};
+  justify-content: center;
+  padding: 0px 24px;
+`;
+
+export const Title = styled.p`
+  font-family: Open Sans;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 18px;
+  line-height: 25px;
+  color: ${colors.Primary.blue};
+`;
+
+export const Content = styled.div`
+  padding: 0px 24px;
+  flex: 1;
+`;
+
+export const UserBox = styled.div`
+  margin-top: 24px;
+  margin-bottom: 40px;
+  flex: 1;
+  display: flex;
+  flex-direction: row;
+  height: 46px;
+  align-items: center;
+`;
+
+export const UserNameBox = styled.p`
+  margin-left: 9px;
+`;
+
+export const UserName = styled.p`
+  font-family: Poppins;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 21px;
+  margin: 0;
+  text-transform: capitalize;
+`;
+
+export const Email = styled.p`
+  font-family: Poppins;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 11px;
+  line-height: 16px;
+  letter-spacing: 0.01em;
+  color: ${colors.Primary.gray};
+  margin: 0;
 `;

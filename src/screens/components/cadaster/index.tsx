@@ -4,7 +4,11 @@ import Header from '../../../assets/components/header';
 import Sidebar from '../../../assets/components/sidebar';
 import {StateRoles} from '../../../assets/components/sidebar/index.type';
 import {userService} from '../../../services/user';
-import {Departments, Teachers} from '../../containers/cadaster/index.type';
+import {
+  Departments,
+  Disciplines,
+  Teachers,
+} from '../../containers/cadaster/index.type';
 import {CadasterProps} from './index.type';
 import {
   Container,
@@ -28,19 +32,23 @@ const renderTeachers = (teachers: Array<Teachers>) =>
     <option value={teacher.siape}>{teacher.nome}</option>
   ));
 
+const renderDisciplines = (disciplines: Array<Disciplines>) =>
+  disciplines?.map(discipline => <ul>{discipline.nomeDisciplina}</ul>);
+
 const {user}: any = userService.getUserInfo();
 
 const Cadaster: React.FC<CadasterProps> = ({
   routes,
   departments,
   teachers,
+  disciplines,
   onChangeDepartment,
 }) => {
   const [roles] = useState<StateRoles>({data: userService.getRoles()});
 
   return (
     <Container>
-      <Sidebar name={user?.nome} data={roles.data} routes={routes} />
+      <Sidebar user={user} data={roles.data} routes={routes} />
       <Content>
         <Header />
         <MainContent>
@@ -61,6 +69,11 @@ const Cadaster: React.FC<CadasterProps> = ({
                 </Select>
               </InputBox>
             </Line>
+          </MainCard>
+        </MainContent>
+        <MainContent>
+          <MainCard>
+            <li>{renderDisciplines(disciplines)}</li>
           </MainCard>
         </MainContent>
       </Content>

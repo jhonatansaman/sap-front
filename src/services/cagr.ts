@@ -10,6 +10,18 @@ class CAGR {
       department: param,
     });
   }
+
+  getDisciplinesByDepartment(
+    department: string | null,
+    semester: string | null,
+  ) {
+    return api.get(`/cagr/get-disciplines-by-department`, {
+      params: {
+        department,
+        semester,
+      },
+    });
+  }
 }
 
 export const cagrService = new CAGR();

@@ -5,4 +5,5 @@ export const Container = styled.div`
   padding: 20px;
   background: ${colors.Main.white};
   border-radius: 8px;
+  border: 1px solid ${colors.Main.divider};
 `;

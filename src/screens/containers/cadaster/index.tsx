@@ -1,10 +1,20 @@
 import React from 'react';
 import IconMessage from '../../../assets/UIkit/images/ico-message.png';
+import IconCollegiate from '../../../assets/UIkit/icons/ico-collegiate.svg';
+import {alertService} from '../../../services/alert';
 import {cagrService} from '../../../services/cagr';
+import {getCurrentSemester} from '../../../utils/currentSemester';
 import Cadaster from '../../components/cadaster';
-import {DepartmentsState, Teachers, TearchersState} from './index.type';
+import {
+  DepartmentsState,
+  Disciplines,
+  DisciplinesState,
+  Teachers,
+  TearchersState,
+} from './index.type';
 
-const menus = [{label: 'Membro do colegiado', icon: IconMessage}];
+const menus = [{label: 'Colegiado', icon: IconCollegiate}];
+const currentSemester = getCurrentSemester();
 
 const getInitialData = async (
   setDepartments: (data: DepartmentsState) => void,
@@ -15,14 +25,26 @@ const getInitialData = async (
   } catch (error) {}
 };
 
-const getTeachersByDepartment = async (
+const getInitialDataByDepartment = async (
   department: string | null,
   setTeachers: (data: TearchersState) => void,
+  setDisciplines: (data: DisciplinesState) => void,
 ) => {
   try {
     const {data} = await cagrService.getTeachersByDepartment(department);
+
+    if (department) {
+      const disciplines = await cagrService.getDisciplinesByDepartment(
+        department.split('/')?.[0],
+        currentSemester,
+      );
+      setDisciplines({data: disciplines?.data});
+    }
+
     setTeachers({data});
-  } catch (error) {}
+  } catch (error) {
+    alertService.error('Erro ao buscar disciplina');
+  }
 };
 
 const CadasterContainer: React.FC = () => {
@@ -30,6 +52,9 @@ const CadasterContainer: React.FC = () => {
     data: [],
   });
   const [teachers, setTeachers] = React.useState<TearchersState>({
+    data: [],
+  });
+  const [disciplines, setDisciplines] = React.useState<DisciplinesState>({
     data: [],
   });
   const [departmentSelected, setDepartmentSelected] = React.useState<
@@ -41,7 +66,7 @@ const CadasterContainer: React.FC = () => {
   }, []);
 
   React.useEffect(() => {
-    getTeachersByDepartment(departmentSelected, setTeachers);
+    getInitialDataByDepartment(departmentSelected, setTeachers, setDisciplines);
   }, [departmentSelected]);
 
   return (
@@ -49,6 +74,7 @@ const CadasterContainer: React.FC = () => {
       routes={menus}
       departments={departments?.data}
       teachers={teachers?.data}
+      disciplines={disciplines?.data}
       onChangeDepartment={(param: string) => setDepartmentSelected(param)}
     />
   );

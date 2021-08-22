@@ -9,6 +9,24 @@ export interface Roles {
   englobado: boolean;
 }
 
+export interface User {
+  centro: string;
+  codigoCurso: number;
+  cpf: string;
+  curso: string;
+  dataNascimento: string;
+  email: string;
+  erro: boolean;
+  idPessoa: number;
+  matricula: number;
+  mensagem: string;
+  nome: string;
+  pais: string;
+  serpro: number;
+  siape: number;
+  tipo: string;
+}
+
 export interface APIResponseRoles {
   erro: boolean;
   idPessoa: number;
@@ -33,6 +51,6 @@ export interface MenuSidebar {
   icon: any;
 }
 export interface SidebarProps extends StateRoles {
-  name: string;
+  user: User;
   routes: Array<MenuSidebar>;
 }

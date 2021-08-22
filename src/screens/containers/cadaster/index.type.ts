@@ -115,3 +115,30 @@ export interface DepartmentsState {
 export interface TearchersState {
   data: Array<Teachers>;
 }
+export interface TeacherDiscipline {
+  nomeProfessor: string;
+  siapeProfessor: number;
+}
+
+export interface HourDsicipline {
+  codigoDisciplina: string;
+  codigoTurma: string;
+  localizacaoCentro: string;
+  localizacaoEspacoFisico: string;
+  diaSemana: number;
+  horario: number;
+}
+export interface Disciplines {
+  codigoDisciplina: string;
+  nomeDisciplina: string;
+  semestre: number;
+  codigoTurma: string;
+  codigoCurso: number;
+  nomeCurso: string;
+  professores: Array<TeacherDiscipline>;
+  horarios: Array<HourDsicipline>;
+}
+
+export interface DisciplinesState {
+  data: Array<Disciplines>;
+}
