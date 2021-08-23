@@ -4,13 +4,16 @@ import {Container, Box, Page} from './styles';
 
 const renderPages = ({pages, action, currentPage}: PaginatorProps) =>
   Array.from({length: pages}).map((_, i) => (
-    <Box actived={currentPage === i} onClick={() => action(i)}>
+    <Box
+      key={i.toString()}
+      actived={currentPage === i}
+      onClick={() => action(i)}>
       <Page actived={currentPage === i}>{i}</Page>
     </Box>
   ));
 
-const Paginator: React.FC<PaginatorProps> = ({pages, action, currentPage}) => {
-  return <Container>{renderPages({pages, action, currentPage})}</Container>;
-};
+const Paginator: React.FC<PaginatorProps> = ({pages, action, currentPage}) => (
+  <Container>{renderPages({pages, action, currentPage})}</Container>
+);
 
 export default Paginator;

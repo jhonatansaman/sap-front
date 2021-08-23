@@ -33,6 +33,7 @@ const getInitialDataByDepartment = async (
   setTeachers: (data: TearchersState) => void,
   setDisciplines: (data: DisciplinesState) => void,
   setIsShownModal: (param: boolean) => void,
+  setCurrentPage: (param: number) => void,
 ) => {
   try {
     setIsShownModal(true);
@@ -48,6 +49,7 @@ const getInitialDataByDepartment = async (
     }
 
     setIsShownModal(false);
+    setCurrentPage(0);
   } catch (error) {
     alertService.error('Erro ao buscar disciplina');
   }
@@ -79,6 +81,7 @@ const CadasterContainer: React.FC = () => {
       setTeachers,
       setDisciplines,
       setIsShownModal,
+      setCurrentPage,
     );
   }, [departmentSelected]);
 

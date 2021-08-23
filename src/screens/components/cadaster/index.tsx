@@ -25,9 +25,10 @@ import {
   PaginatorBox,
 } from './styles';
 
-const HEADERS = ['Código', 'Disciplina', 'Fase'];
-const SIZE_TD = 100 / HEADERS.length;
+const HEADERS = ['', 'Código', 'Disciplina', 'Fase'];
+const SIZE_TD = 90 / HEADERS.length;
 const ITEM_PER_PAGE = 7;
+const CHECKBOX_COLUMN_WIDTH = 10;
 
 const renderDepartments = (departments: Array<Departments>) =>
   departments?.map(department => (
@@ -43,13 +44,16 @@ const renderTeachers = (teachers: Array<Teachers>) =>
 
 const renderDisciplines = (disciplines: Array<Disciplines>) =>
   disciplines?.map(discipline => (
-    <>
+    <React.Fragment>
       <TableRow>
+        <TD width={5}>
+          <input type="checkbox" />
+        </TD>
         <TD width={SIZE_TD}>{discipline.codigoDisciplina}</TD>
         <TD width={SIZE_TD}>{discipline.nomeDisciplina}</TD>
         <TD width={SIZE_TD}>{discipline.codigoTurma}</TD>
       </TableRow>
-    </>
+    </React.Fragment>
   ));
 
 const {user}: any = userService.getUserInfo();
