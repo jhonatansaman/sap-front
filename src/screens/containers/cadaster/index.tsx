@@ -70,6 +70,9 @@ const CadasterContainer: React.FC = () => {
   >(null);
   const [isShownModal, setIsShownModal] = React.useState<boolean>(false);
   const [currentPage, setCurrentPage] = React.useState<number>(0);
+  const [selectedDisciplines, setSelectedDisciplines] = React.useState<
+    Array<string>
+  >([]);
 
   React.useEffect(() => {
     getInitialData(setDepartments);
@@ -95,6 +98,10 @@ const CadasterContainer: React.FC = () => {
       isShownModal={isShownModal}
       currentPage={currentPage}
       setCurrentPage={setCurrentPage}
+      onSelectDisciplines={(param: string) =>
+        setSelectedDisciplines([...selectedDisciplines, param])
+      }
+      selectedDisciplines={selectedDisciplines}
     />
   );
 };

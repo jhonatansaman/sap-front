@@ -14,4 +14,6 @@ export interface CadasterProps {
   isShownModal: boolean;
   currentPage: number;
   setCurrentPage: (param: number) => void;
+  selectedDisciplines: Array<string>;
+  onSelectDisciplines: (param: string) => void;
 }

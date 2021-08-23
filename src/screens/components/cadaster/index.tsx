@@ -42,12 +42,22 @@ const renderTeachers = (teachers: Array<Teachers>) =>
     <option value={teacher.siape}>{teacher.nome}</option>
   ));
 
-const renderDisciplines = (disciplines: Array<Disciplines>) =>
+const renderDisciplines = (
+  disciplines: Array<Disciplines>,
+  selectedDisciplines: Array<string>,
+  onSelectDisciplines: (param: string) => void,
+) =>
   disciplines?.map(discipline => (
     <React.Fragment>
       <TableRow>
-        <TD width={5}>
-          <input type="checkbox" />
+        <TD width={CHECKBOX_COLUMN_WIDTH}>
+          <input
+            type="checkbox"
+            onChange={() => onSelectDisciplines(discipline.codigoDisciplina)}
+            checked={selectedDisciplines.some(
+              codeDiscipline => codeDiscipline === discipline.codigoDisciplina,
+            )}
+          />
         </TD>
         <TD width={SIZE_TD}>{discipline.codigoDisciplina}</TD>
         <TD width={SIZE_TD}>{discipline.nomeDisciplina}</TD>
@@ -67,6 +77,8 @@ const Cadaster: React.FC<CadasterProps> = ({
   isShownModal,
   currentPage,
   setCurrentPage,
+  selectedDisciplines,
+  onSelectDisciplines,
 }) => {
   const [roles] = useState<StateRoles>({data: userService.getRoles()});
 
@@ -104,6 +116,8 @@ const Cadaster: React.FC<CadasterProps> = ({
                   currentPage * ITEM_PER_PAGE,
                   ITEM_PER_PAGE * (currentPage + 1),
                 ),
+                selectedDisciplines,
+                onSelectDisciplines,
               )}
             />
             <PaginatorBox>
