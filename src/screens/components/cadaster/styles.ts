@@ -35,3 +35,11 @@ export const Select = styled.select`
   background: ${colors.Main.white};
   border: 1px solid ${colors.Main.divider};
 `;
+
+export const PaginatorBox = styled.div`
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  margin-top: 10px;
+`;

@@ -2,6 +2,7 @@ import React, {useState} from 'react';
 import MainCard from '../../../assets/components/card';
 import Header from '../../../assets/components/header';
 import Modal from '../../../assets/components/modal';
+import Paginator from '../../../assets/components/paginator';
 import Sidebar from '../../../assets/components/sidebar';
 import {StateRoles} from '../../../assets/components/sidebar/index.type';
 import Table from '../../../assets/components/table';
@@ -21,10 +22,12 @@ import {
   Line,
   MainContent,
   Select,
+  PaginatorBox,
 } from './styles';
 
 const HEADERS = ['Código', 'Disciplina', 'Fase'];
 const SIZE_TD = 100 / HEADERS.length;
+const ITEM_PER_PAGE = 7;
 
 const renderDepartments = (departments: Array<Departments>) =>
   departments?.map(department => (
@@ -58,6 +61,8 @@ const Cadaster: React.FC<CadasterProps> = ({
   disciplines,
   onChangeDepartment,
   isShownModal,
+  currentPage,
+  setCurrentPage,
 }) => {
   const [roles] = useState<StateRoles>({data: userService.getRoles()});
 
@@ -90,8 +95,20 @@ const Cadaster: React.FC<CadasterProps> = ({
           <MainCard>
             <Table
               tableHeaders={HEADERS}
-              renderRows={renderDisciplines(disciplines)}
+              renderRows={renderDisciplines(
+                disciplines.slice(
+                  currentPage * ITEM_PER_PAGE,
+                  ITEM_PER_PAGE * (currentPage + 1),
+                ),
+              )}
             />
+            <PaginatorBox>
+              <Paginator
+                pages={disciplines.length / 7}
+                action={param => setCurrentPage(param)}
+                currentPage={currentPage}
+              />
+            </PaginatorBox>
           </MainCard>
         </MainContent>
       </Content>

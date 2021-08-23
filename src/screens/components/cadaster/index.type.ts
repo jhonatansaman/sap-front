@@ -12,4 +12,6 @@ export interface CadasterProps {
   disciplines: Array<Disciplines>;
   onChangeDepartment: (param: string) => void;
   isShownModal: boolean;
+  currentPage: number;
+  setCurrentPage: (param: number) => void;
 }

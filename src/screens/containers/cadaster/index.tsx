@@ -67,6 +67,7 @@ const CadasterContainer: React.FC = () => {
     string | null
   >(null);
   const [isShownModal, setIsShownModal] = React.useState<boolean>(false);
+  const [currentPage, setCurrentPage] = React.useState<number>(0);
 
   React.useEffect(() => {
     getInitialData(setDepartments);
@@ -89,6 +90,8 @@ const CadasterContainer: React.FC = () => {
       disciplines={disciplines?.data}
       onChangeDepartment={(param: string) => setDepartmentSelected(param)}
       isShownModal={isShownModal}
+      currentPage={currentPage}
+      setCurrentPage={setCurrentPage}
     />
   );
 };
