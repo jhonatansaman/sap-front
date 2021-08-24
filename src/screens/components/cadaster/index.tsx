@@ -9,6 +9,7 @@ import Table from '../../../assets/components/table';
 import {TableRow, TD, Th} from '../../../assets/components/table/styles';
 import {userService} from '../../../services/user';
 import {
+  APIResponseDisciplines,
   Departments,
   Disciplines,
   Teachers,
@@ -23,6 +24,11 @@ import {
   MainContent,
   Select,
   PaginatorBox,
+  CardDiscipline,
+  SelectedBox,
+  CodeDiscipline,
+  Close,
+  CloseButton,
 } from './styles';
 
 const HEADERS = ['', 'Código', 'Disciplina', 'Fase'];
@@ -43,7 +49,7 @@ const renderTeachers = (teachers: Array<Teachers>) =>
   ));
 
 const renderDisciplines = (
-  disciplines: Array<Disciplines>,
+  disciplines: Array<APIResponseDisciplines>,
   selectedDisciplines: Array<string>,
   onSelectDisciplines: (param: string) => void,
 ) =>
@@ -53,15 +59,15 @@ const renderDisciplines = (
         <TD width={CHECKBOX_COLUMN_WIDTH}>
           <input
             type="checkbox"
-            onChange={() => onSelectDisciplines(discipline.codigoDisciplina)}
+            onChange={() => onSelectDisciplines(discipline.codigo)}
             checked={selectedDisciplines.some(
-              codeDiscipline => codeDiscipline === discipline.codigoDisciplina,
+              codeDiscipline => codeDiscipline === discipline.codigo,
             )}
           />
         </TD>
-        <TD width={SIZE_TD}>{discipline.codigoDisciplina}</TD>
-        <TD width={SIZE_TD}>{discipline.nomeDisciplina}</TD>
-        <TD width={SIZE_TD}>{discipline.codigoTurma}</TD>
+        <TD width={SIZE_TD}>{discipline.codigo}</TD>
+        <TD width={SIZE_TD}>{discipline.nome}</TD>
+        <TD width={SIZE_TD}>{discipline.fase}</TD>
       </TableRow>
     </React.Fragment>
   ));
@@ -107,6 +113,18 @@ const Cadaster: React.FC<CadasterProps> = ({
             </Line>
           </MainCard>
         </MainContent>
+        {selectedDisciplines?.length ? (
+          <SelectedBox>
+            {selectedDisciplines?.map(code => (
+              <CardDiscipline>
+                <CodeDiscipline>{code}</CodeDiscipline>
+                <Close onClick={() => onSelectDisciplines(code)}>
+                  <CloseButton>X</CloseButton>
+                </Close>
+              </CardDiscipline>
+            ))}
+          </SelectedBox>
+        ) : null}
         <MainContent>
           <MainCard>
             <Table

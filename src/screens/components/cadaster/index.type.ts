@@ -1,5 +1,6 @@
 import {MenuSidebar} from '../../../assets/components/sidebar/index.type';
 import {
+  APIResponseDisciplines,
   Departments,
   Disciplines,
   Teachers,
@@ -9,7 +10,7 @@ export interface CadasterProps {
   routes: Array<MenuSidebar>;
   departments: Array<Departments>;
   teachers: Array<Teachers>;
-  disciplines: Array<Disciplines>;
+  disciplines: Array<APIResponseDisciplines>;
   onChangeDepartment: (param: string) => void;
   isShownModal: boolean;
   currentPage: number;

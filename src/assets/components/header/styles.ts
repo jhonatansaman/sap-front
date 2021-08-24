@@ -13,4 +13,6 @@ export const Container = styled.div`
 
 export const Text = styled.div`
   font-size: 14px;
+  color: ${colors.Primary.table_gray};
+  font-family: Poppins;
 `;

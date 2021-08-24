@@ -55,6 +55,23 @@ const getInitialDataByDepartment = async (
   }
 };
 
+const onSelectDiscipline = (
+  value: string,
+  disciplinesSelected: Array<string>,
+  setDisciplineSelected: (param: Array<string>) => void,
+) => {
+  const alreadySelect: boolean = disciplinesSelected?.some(
+    code => code === value,
+  );
+  if (alreadySelect) {
+    return setDisciplineSelected(
+      disciplinesSelected?.filter(code => code !== value),
+    );
+  }
+
+  return setDisciplineSelected([...disciplinesSelected, value]);
+};
+
 const CadasterContainer: React.FC = () => {
   const [departments, setDepartments] = React.useState<DepartmentsState>({
     data: [],
@@ -99,7 +116,7 @@ const CadasterContainer: React.FC = () => {
       currentPage={currentPage}
       setCurrentPage={setCurrentPage}
       onSelectDisciplines={(param: string) =>
-        setSelectedDisciplines([...selectedDisciplines, param])
+        onSelectDiscipline(param, selectedDisciplines, setSelectedDisciplines)
       }
       selectedDisciplines={selectedDisciplines}
     />

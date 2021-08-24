@@ -139,6 +139,12 @@ export interface Disciplines {
   horarios: Array<HourDsicipline>;
 }
 
+export interface APIResponseDisciplines {
+  codigo: string;
+  nome: string;
+  fase: string;
+}
+
 export interface DisciplinesState {
-  data: Array<Disciplines>;
+  data: Array<APIResponseDisciplines>;
 }
