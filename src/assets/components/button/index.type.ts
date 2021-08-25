@@ -10,3 +10,7 @@ export interface UIModifiers {
   flex: string;
   children?: string;
 }
+
+export interface ButtonProps {
+  title: string;
+}

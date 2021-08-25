@@ -1,4 +1,5 @@
 import React, {useState} from 'react';
+import Button from '../../../assets/components/button';
 import MainCard from '../../../assets/components/card';
 import Header from '../../../assets/components/header';
 import Modal from '../../../assets/components/modal';
@@ -29,6 +30,7 @@ import {
   CodeDiscipline,
   Close,
   CloseButton,
+  ButtonBox,
 } from './styles';
 
 const HEADERS = ['', 'Código', 'Disciplina', 'Fase'];
@@ -123,6 +125,9 @@ const Cadaster: React.FC<CadasterProps> = ({
                 </Close>
               </CardDiscipline>
             ))}
+            <ButtonBox>
+              <Button title="Salvar" />
+            </ButtonBox>
           </SelectedBox>
         ) : null}
         <MainContent>

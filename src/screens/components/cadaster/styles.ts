@@ -18,7 +18,7 @@ export const Line = styled.div`
 `;
 
 export const MainContent = styled.div`
-  padding: 10px;
+  padding: 10px 25px;
 `;
 
 export const InputBox = styled.div`
@@ -48,7 +48,7 @@ export const SelectedBox = styled.div`
   flex: 1;
   flex-direction: row;
   display: flex;
-  padding: 0px 10px;
+  padding: 0px 25px;
 `;
 
 const animation = keyframes`
@@ -104,4 +104,11 @@ export const CloseButton = styled.p`
   font-size: 12px;
   font-family: Poppins;
   color: ${colors.Main.white};
+`;
+
+export const ButtonBox = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  flex: 1;
 `;
