@@ -1,16 +1,17 @@
 import React from 'react';
-import IconMessage from '../../../assets/UIkit/images/ico-message.png';
 import IconCollegiate from '../../../assets/UIkit/icons/ico-collegiate.svg';
 import IconCollegiateActived from '../../../assets/UIkit/icons/ico-collegiate_actived.svg';
 import {alertService} from '../../../services/alert';
 import {cagrService} from '../../../services/cagr';
+import {collegiateService} from '../../../services/graphql/collegiate';
 import {getCurrentSemester} from '../../../utils/currentSemester';
 import Cadaster from '../../components/cadaster';
 import {
   DepartmentsState,
-  Disciplines,
   DisciplinesState,
-  Teachers,
+  DisciplineType,
+  MemberCollegiateState,
+  TeacherType,
   TearchersState,
 } from './index.type';
 
@@ -56,20 +57,27 @@ const getInitialDataByDepartment = async (
 };
 
 const onSelectDiscipline = (
-  value: string,
-  disciplinesSelected: Array<string>,
-  setDisciplineSelected: (param: Array<string>) => void,
+  value: DisciplineType,
+  memberCollegiate: MemberCollegiateState,
+  setMemberCollegiate: (param: MemberCollegiateState) => void,
 ) => {
-  const alreadySelect: boolean = disciplinesSelected?.some(
-    code => code === value,
+  const alreadySelect: boolean = memberCollegiate?.discipline.some(
+    discipline => discipline.disciplineCode === value.disciplineCode,
   );
+
   if (alreadySelect) {
-    return setDisciplineSelected(
-      disciplinesSelected?.filter(code => code !== value),
-    );
+    return setMemberCollegiate({
+      ...memberCollegiate,
+      discipline: memberCollegiate?.discipline.filter(
+        discipline => discipline.disciplineCode !== value.disciplineCode,
+      ),
+    });
   }
 
-  return setDisciplineSelected([...disciplinesSelected, value]);
+  return setMemberCollegiate({
+    ...memberCollegiate,
+    discipline: [...memberCollegiate?.discipline, value],
+  });
 };
 
 const CadasterContainer: React.FC = () => {
@@ -82,14 +90,15 @@ const CadasterContainer: React.FC = () => {
   const [disciplines, setDisciplines] = React.useState<DisciplinesState>({
     data: [],
   });
-  const [departmentSelected, setDepartmentSelected] = React.useState<
-    string | null
-  >(null);
   const [isShownModal, setIsShownModal] = React.useState<boolean>(false);
   const [currentPage, setCurrentPage] = React.useState<number>(0);
-  const [selectedDisciplines, setSelectedDisciplines] = React.useState<
-    Array<string>
-  >([]);
+
+  const [memberCollegiate, setMemberCollegiate] =
+    React.useState<MemberCollegiateState>({
+      department: '',
+      discipline: [],
+      teacher: null,
+    });
 
   React.useEffect(() => {
     getInitialData(setDepartments);
@@ -97,13 +106,13 @@ const CadasterContainer: React.FC = () => {
 
   React.useEffect(() => {
     getInitialDataByDepartment(
-      departmentSelected,
+      memberCollegiate.department,
       setTeachers,
       setDisciplines,
       setIsShownModal,
       setCurrentPage,
     );
-  }, [departmentSelected]);
+  }, [memberCollegiate?.department]);
 
   return (
     <Cadaster
@@ -111,14 +120,26 @@ const CadasterContainer: React.FC = () => {
       departments={departments?.data}
       teachers={teachers?.data}
       disciplines={disciplines?.data}
-      onChangeDepartment={(param: string) => setDepartmentSelected(param)}
+      onChangeDepartment={(param: string) =>
+        setMemberCollegiate({...memberCollegiate, department: param})
+      }
+      onChangeTeacher={(param: number) =>
+        setMemberCollegiate({
+          ...memberCollegiate,
+          teacher: {
+            teacherName: teachers?.data?.[param]?.nome,
+            siape: teachers?.data?.[param]?.siape,
+          },
+        })
+      }
       isShownModal={isShownModal}
       currentPage={currentPage}
       setCurrentPage={setCurrentPage}
-      onSelectDisciplines={(param: string) =>
-        onSelectDiscipline(param, selectedDisciplines, setSelectedDisciplines)
+      selectedDisciplines={memberCollegiate?.discipline}
+      onSelectDisciplines={(param: DisciplineType) =>
+        onSelectDiscipline(param, memberCollegiate, setMemberCollegiate)
       }
-      selectedDisciplines={selectedDisciplines}
+      onClickSave={() => collegiateService.createOne(memberCollegiate)}
     />
   );
 };

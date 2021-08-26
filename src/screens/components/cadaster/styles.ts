@@ -112,3 +112,12 @@ export const ButtonBox = styled.div`
   justify-content: flex-end;
   flex: 1;
 `;
+
+export const CheckBox = styled.input`
+  width: 16px;
+  height: 16px;
+  border: 2px solid #d5d5d5;
+  box-sizing: border-box;
+  border-radius: 4px;
+  cursor: pointer;
+`;

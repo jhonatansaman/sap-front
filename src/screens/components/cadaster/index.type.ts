@@ -3,7 +3,9 @@ import {
   APIResponseDisciplines,
   Departments,
   Disciplines,
+  DisciplineType,
   Teachers,
+  TeacherType,
 } from '../../containers/cadaster/index.type';
 
 export interface CadasterProps {
@@ -15,6 +17,8 @@ export interface CadasterProps {
   isShownModal: boolean;
   currentPage: number;
   setCurrentPage: (param: number) => void;
-  selectedDisciplines: Array<string>;
-  onSelectDisciplines: (param: string) => void;
+  selectedDisciplines: Array<DisciplineType>;
+  onSelectDisciplines: (param: DisciplineType) => void;
+  onChangeTeacher: (param: number) => void;
+  onClickSave: () => void;
 }

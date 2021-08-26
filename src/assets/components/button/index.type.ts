@@ -13,4 +13,5 @@ export interface UIModifiers {
 
 export interface ButtonProps {
   title: string;
+  action: () => void;
 }

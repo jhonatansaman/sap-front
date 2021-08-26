@@ -7,30 +7,31 @@ import Paginator from '../../../assets/components/paginator';
 import Sidebar from '../../../assets/components/sidebar';
 import {StateRoles} from '../../../assets/components/sidebar/index.type';
 import Table from '../../../assets/components/table';
-import {TableRow, TD, Th} from '../../../assets/components/table/styles';
+import {TableRow, TD} from '../../../assets/components/table/styles';
 import {userService} from '../../../services/user';
 import {
   APIResponseDisciplines,
   Departments,
-  Disciplines,
+  DisciplineType,
   Teachers,
 } from '../../containers/cadaster/index.type';
 import {CadasterProps} from './index.type';
 import {
+  ButtonBox,
+  CardDiscipline,
+  CheckBox,
+  Close,
+  CloseButton,
+  CodeDiscipline,
   Container,
   Content,
   InputBox,
   Label,
   Line,
   MainContent,
-  Select,
   PaginatorBox,
-  CardDiscipline,
+  Select,
   SelectedBox,
-  CodeDiscipline,
-  Close,
-  CloseButton,
-  ButtonBox,
 } from './styles';
 
 const HEADERS = ['', 'Código', 'Disciplina', 'Fase'];
@@ -46,24 +47,32 @@ const renderDepartments = (departments: Array<Departments>) =>
   ));
 
 const renderTeachers = (teachers: Array<Teachers>) =>
-  teachers?.map(teacher => (
-    <option value={teacher.siape}>{teacher.nome}</option>
+  teachers?.map((teacher, index) => (
+    <option key={index} value={index}>
+      {teacher.nome}
+    </option>
   ));
 
 const renderDisciplines = (
   disciplines: Array<APIResponseDisciplines>,
-  selectedDisciplines: Array<string>,
-  onSelectDisciplines: (param: string) => void,
+  selectedDisciplines: Array<DisciplineType>,
+  onSelectDisciplines: (param: DisciplineType) => void,
 ) =>
   disciplines?.map(discipline => (
     <React.Fragment>
       <TableRow>
         <TD width={CHECKBOX_COLUMN_WIDTH}>
-          <input
+          <CheckBox
             type="checkbox"
-            onChange={() => onSelectDisciplines(discipline.codigo)}
+            onChange={() =>
+              onSelectDisciplines({
+                disciplineCode: discipline.codigo,
+                disciplineName: discipline.nome,
+              })
+            }
             checked={selectedDisciplines.some(
-              codeDiscipline => codeDiscipline === discipline.codigo,
+              codeDiscipline =>
+                codeDiscipline.disciplineCode === discipline.codigo,
             )}
           />
         </TD>
@@ -72,6 +81,19 @@ const renderDisciplines = (
         <TD width={SIZE_TD}>{discipline.fase}</TD>
       </TableRow>
     </React.Fragment>
+  ));
+
+const renderCards = (
+  disciplines: Array<DisciplineType>,
+  onSelectDisciplines: (param: DisciplineType) => void,
+) =>
+  disciplines?.map(discipline => (
+    <CardDiscipline>
+      <CodeDiscipline>{discipline.disciplineCode}</CodeDiscipline>
+      <Close onClick={() => onSelectDisciplines(discipline)}>
+        <CloseButton>X</CloseButton>
+      </Close>
+    </CardDiscipline>
   ));
 
 const {user}: any = userService.getUserInfo();
@@ -87,6 +109,8 @@ const Cadaster: React.FC<CadasterProps> = ({
   setCurrentPage,
   selectedDisciplines,
   onSelectDisciplines,
+  onChangeTeacher,
+  onClickSave,
 }) => {
   const [roles] = useState<StateRoles>({data: userService.getRoles()});
 
@@ -108,7 +132,12 @@ const Cadaster: React.FC<CadasterProps> = ({
               </InputBox>
               <InputBox>
                 <Label>Professor</Label>
-                <Select disabled={!teachers?.length} name="select">
+                <Select
+                  disabled={!teachers?.length}
+                  name="select"
+                  onChange={param =>
+                    onChangeTeacher(Number(param.target.value))
+                  }>
                   {renderTeachers(teachers)}
                 </Select>
               </InputBox>
@@ -117,16 +146,9 @@ const Cadaster: React.FC<CadasterProps> = ({
         </MainContent>
         {selectedDisciplines?.length ? (
           <SelectedBox>
-            {selectedDisciplines?.map(code => (
-              <CardDiscipline>
-                <CodeDiscipline>{code}</CodeDiscipline>
-                <Close onClick={() => onSelectDisciplines(code)}>
-                  <CloseButton>X</CloseButton>
-                </Close>
-              </CardDiscipline>
-            ))}
+            {renderCards(selectedDisciplines, onSelectDisciplines)}
             <ButtonBox>
-              <Button title="Salvar" />
+              <Button title="Salvar" action={onClickSave} />
             </ButtonBox>
           </SelectedBox>
         ) : null}

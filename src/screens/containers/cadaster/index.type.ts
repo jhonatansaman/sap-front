@@ -148,3 +148,18 @@ export interface APIResponseDisciplines {
 export interface DisciplinesState {
   data: Array<APIResponseDisciplines>;
 }
+
+export type TeacherType = {
+  siape: number;
+  teacherName: string;
+};
+
+export type DisciplineType = {
+  disciplineCode: string;
+  disciplineName: string;
+};
+export interface MemberCollegiateState {
+  department: string;
+  teacher: TeacherType | null;
+  discipline: Array<DisciplineType>;
+}
