@@ -25,6 +25,13 @@ const menus: Array<MenuSidebar> = [
     iconActived: IconCollegiateActived,
     isActived: false,
   },
+  {
+    label: 'Eventos',
+    subRoutes: [{name: 'Cadastrar Feriados'}],
+    icon: IconCollegiate,
+    iconActived: IconCollegiateActived,
+    isActived: false,
+  },
 ];
 
 const initialData: MemberCollegiateState = {

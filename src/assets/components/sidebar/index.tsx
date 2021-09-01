@@ -34,7 +34,7 @@ const renderMenus = (
   onClickMenu: (param: number) => void,
 ) =>
   routes?.map((menu, index) => (
-    <React.Fragment>
+    <div style={{marginBottom: 5}}>
       <ContainerMenu
         active={menu.isActived}
         key={index.toString()}
@@ -50,7 +50,7 @@ const renderMenus = (
       {menu.isActived &&
         menu.subRoutes.length &&
         renderSubMenus(menu.subRoutes)}
-    </React.Fragment>
+    </div>
   ));
 
 const renderRoles = (roles: Array<Roles> | undefined) =>
@@ -71,8 +71,8 @@ const Sidebar: React.FC<SidebarProps> = ({user, data, routes, onClickMenu}) => (
           <Email>{user.email}</Email>
         </UserNameBox>
       </UserBox>
-      {renderMenus(routes, onClickMenu)}
     </Content>
+    {renderMenus(routes, onClickMenu)}
   </Container>
 );
 export default Sidebar;

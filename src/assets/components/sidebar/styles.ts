@@ -12,8 +12,8 @@ const modifiers = {
   },
   containerMenu: {
     active: css`
-      border-right: 1px solid ${colors.Main.divider};
-      border-left: 1px solid ${colors.Main.divider};
+      /* border-right: 1px solid ${colors.Main.divider}; */
+      /* border-left: 1px solid ${colors.Main.divider}; */
       border-top: 1px solid ${colors.Main.divider};
     `,
     disabled: css`
@@ -194,7 +194,6 @@ export const Title = styled.p`
 
 export const Content = styled.div`
   padding: 0px 24px;
-  flex: 1;
 `;
 
 export const UserBox = styled.div`
@@ -234,6 +233,7 @@ export const Email = styled.p`
 
 export const ArrowRightBox = styled.div<UIModifiers>`
   margin-left: auto;
+  margin-right: 5px;
   justify-content: center;
   align-items: center;
   display: flex;
@@ -256,9 +256,7 @@ export const SubMenuBox = styled.div`
   justify-content: flex-start;
   border-radius: 4px;
   animation: ${fadeInAnimation} 0.5s;
-  border-left: 1px solid ${colors.Main.divider};
   border-bottom: 1px solid ${colors.Main.divider};
-  border-right: 1px solid ${colors.Main.divider};
 `;
 
 export const LI = styled.p`
