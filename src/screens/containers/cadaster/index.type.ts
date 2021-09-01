@@ -150,7 +150,7 @@ export interface DisciplinesState {
 }
 
 export type TeacherType = {
-  siape: number;
+  siape: string;
   teacherName: string;
 };
 

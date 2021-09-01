@@ -21,4 +21,5 @@ export interface CadasterProps {
   onSelectDisciplines: (param: DisciplineType) => void;
   onChangeTeacher: (param: number) => void;
   onClickSave: () => void;
+  onClickMenu: (param: number) => void;
 }

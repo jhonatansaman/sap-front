@@ -111,12 +111,18 @@ const Cadaster: React.FC<CadasterProps> = ({
   onSelectDisciplines,
   onChangeTeacher,
   onClickSave,
+  onClickMenu,
 }) => {
   const [roles] = useState<StateRoles>({data: userService.getRoles()});
 
   return (
     <Container>
-      <Sidebar user={user} data={roles.data} routes={routes} />
+      <Sidebar
+        user={user}
+        data={roles.data}
+        routes={routes}
+        onClickMenu={onClickMenu}
+      />
       <Content>
         <Header />
         <MainContent>

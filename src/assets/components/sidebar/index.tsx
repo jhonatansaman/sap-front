@@ -1,54 +1,66 @@
 import React from 'react';
 import {capitalize} from '../../../utils/capitalize';
-import Arrow from '../../UIkit/images/arrow-drop-down.png';
-import Avatar from '../../UIkit/images/avatar.png';
-import {MenuSidebar, Roles, SidebarProps} from './index.type';
+import ArrowRight from '../../UIkit/icons/ico-arrow_right.svg';
+import {MenuSidebar, Roles, SidebarProps, SubRoute} from './index.type';
 import {
-  Bottom,
-  Button,
+  ArrowRightBox,
   Container,
   ContainerMenu,
-  Dropdown,
-  DropdownContent,
-  Header,
+  Content,
+  Email,
   IconBox,
   Image,
   ImageBox,
-  Left,
+  LI,
   Link,
   Menu,
-  Middle,
-  Right,
-  Top,
-  User,
-  TitleBox,
+  SubMenuBox,
   Title,
-  Content,
+  TitleBox,
   UserBox,
   UserName,
   UserNameBox,
-  Email,
 } from './styles';
 
-const renderMenus = (routes: Array<MenuSidebar>) =>
+const renderSubMenus = (subMenus: Array<SubRoute>) =>
+  subMenus.map(menu => (
+    <SubMenuBox onClick={() => false}>
+      <LI>- {menu.name}</LI>
+    </SubMenuBox>
+  ));
+
+const renderMenus = (
+  routes: Array<MenuSidebar>,
+  onClickMenu: (param: number) => void,
+) =>
   routes?.map((menu, index) => (
-    <ContainerMenu key={index.toString()}>
-      <IconBox>
-        <Image src={menu.icon} />
-      </IconBox>
-      <Menu>{menu.label}</Menu>
-    </ContainerMenu>
+    <React.Fragment>
+      <ContainerMenu
+        active={menu.isActived}
+        key={index.toString()}
+        onClick={() => onClickMenu(index)}>
+        <IconBox>
+          <Image src={menu.icon} />
+        </IconBox>
+        <Menu active={menu.isActived}>{menu.label}</Menu>
+        <ArrowRightBox active={menu.isActived}>
+          <Image src={ArrowRight} />
+        </ArrowRightBox>
+      </ContainerMenu>
+      {menu.isActived &&
+        menu.subRoutes.length &&
+        renderSubMenus(menu.subRoutes)}
+    </React.Fragment>
   ));
 
 const renderRoles = (roles: Array<Roles> | undefined) =>
   roles?.map(role => <Link href="#">{role.nome}</Link>);
 
-const Sidebar: React.FC<SidebarProps> = ({user, data, routes}) => (
+const Sidebar: React.FC<SidebarProps> = ({user, data, routes, onClickMenu}) => (
   <Container>
     <TitleBox>
       <Title>UFSC - Cadastros</Title>
     </TitleBox>
-
     <Content>
       <UserBox>
         <ImageBox>
@@ -59,7 +71,7 @@ const Sidebar: React.FC<SidebarProps> = ({user, data, routes}) => (
           <Email>{user.email}</Email>
         </UserNameBox>
       </UserBox>
-      {renderMenus(routes)}
+      {renderMenus(routes, onClickMenu)}
     </Content>
   </Container>
 );

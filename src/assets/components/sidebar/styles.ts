@@ -1,5 +1,26 @@
-import styled from 'styled-components';
+import styled, {css, keyframes} from 'styled-components';
 import colors from '../../UIkit/styles/colors';
+import {UIModifiers} from './index.type';
+
+const modifiers = {
+  arrowBoxRight: {
+    active: css`
+      transform: rotate(90deg);
+      -ms-transform: rotate(90deg);
+      -webkit-transform: rotate(90deg);
+    `,
+  },
+  containerMenu: {
+    active: css`
+      border-right: 1px solid ${colors.Main.divider};
+      border-left: 1px solid ${colors.Main.divider};
+      border-top: 1px solid ${colors.Main.divider};
+    `,
+    disabled: css`
+      border: 1px solid ${colors.Main.divider};
+    `,
+  },
+};
 
 export const Container = styled.aside`
   height: 100vh;
@@ -110,29 +131,31 @@ export const DropdownContent = styled.div`
   }
 `;
 
-export const Menu = styled.p`
+export const Menu = styled.p<UIModifiers>`
   font-family: Poppins;
   font-style: normal;
   font-weight: 500;
   font-size: 13px;
   line-height: 19px;
-  color: ${colors.Primary.darkBlue};
+  color: ${props =>
+    props.active ? colors.Main.primary500 : colors.Primary.darkBlue};
   letter-spacing: 0.01em;
   margin-left: 15px;
 `;
 
-export const ContainerMenu = styled.div`
+export const ContainerMenu = styled.div<UIModifiers>`
+  padding: 2px;
   height: 40px;
   display: flex;
+  flex-direction: row;
   border-radius: 4px;
   cursor: pointer;
   align-items: center;
-  &:hover {
-    background: ${colors.Main.primary};
-  }
-  &:hover ${Menu} {
-    color: ${colors.Main.primary500};
-  }
+
+  ${props =>
+    props.active
+      ? modifiers.containerMenu.active
+      : modifiers.containerMenu.disabled}
 `;
 
 export const Left = styled.div`
@@ -207,4 +230,40 @@ export const Email = styled.p`
   letter-spacing: 0.01em;
   color: ${colors.Primary.gray};
   margin: 0;
+`;
+
+export const ArrowRightBox = styled.div<UIModifiers>`
+  margin-left: auto;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  -webkit-transition: -webkit-transform 04s ease-in-out;
+  -ms-transition: -ms-transform 0.4s ease-in-out;
+  transition: transform 0.4s ease-in-out;
+  ${props => props.active && modifiers.arrowBoxRight.active}
+`;
+
+const fadeInAnimation = keyframes` 
+ from { opacity: 0; }
+    to   { opacity: 1; }
+`;
+
+export const SubMenuBox = styled.div`
+  padding: 5px 10px;
+  flex: 1;
+  display: flex;
+  align-items: flex-end;
+  justify-content: flex-start;
+  border-radius: 4px;
+  animation: ${fadeInAnimation} 0.5s;
+  border-left: 1px solid ${colors.Main.divider};
+  border-bottom: 1px solid ${colors.Main.divider};
+  border-right: 1px solid ${colors.Main.divider};
+`;
+
+export const LI = styled.p`
+  color: ${colors.Primary.darkBlue};
+  font-size: 12px;
+  font-family: Poppins;
+  cursor: pointer;
 `;

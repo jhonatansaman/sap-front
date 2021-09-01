@@ -1,9 +1,11 @@
+import {useMutation} from '@apollo/client';
 import React from 'react';
+import {MenuSidebar} from '../../../assets/components/sidebar/index.type';
 import IconCollegiate from '../../../assets/UIkit/icons/ico-collegiate.svg';
 import IconCollegiateActived from '../../../assets/UIkit/icons/ico-collegiate_actived.svg';
 import {alertService} from '../../../services/alert';
 import {cagrService} from '../../../services/cagr';
-import {collegiateService} from '../../../services/graphql/collegiate';
+import {CREATE_ONE_MEMBER_COLLEGIATE} from '../../../services/graphql/collegiate';
 import {getCurrentSemester} from '../../../utils/currentSemester';
 import Cadaster from '../../components/cadaster';
 import {
@@ -15,9 +17,22 @@ import {
   TearchersState,
 } from './index.type';
 
-const menus = [
-  {label: 'Colegiado', icon: IconCollegiate, iconAtived: IconCollegiateActived},
+const menus: Array<MenuSidebar> = [
+  {
+    label: 'Colegiado',
+    subRoutes: [{name: 'Cadastrar Plano'}],
+    icon: IconCollegiate,
+    iconActived: IconCollegiateActived,
+    isActived: false,
+  },
 ];
+
+const initialData: MemberCollegiateState = {
+  department: '',
+  discipline: [],
+  teacher: null,
+};
+
 const currentSemester = getCurrentSemester();
 
 const getInitialData = async (
@@ -80,25 +95,47 @@ const onSelectDiscipline = (
   });
 };
 
+const submit = async (
+  createOne: any,
+  memberCollegiate: MemberCollegiateState,
+  setIsShownModal: (param: boolean) => void,
+  setMemberCollegiate: (param: MemberCollegiateState) => void,
+) => {
+  try {
+    setIsShownModal(true);
+    await createOne({variables: {collegiate: memberCollegiate}});
+    setIsShownModal(false);
+
+    setMemberCollegiate(initialData);
+    alertService.success('Plano cadastrado com sucesso!');
+  } catch (error) {
+    setIsShownModal(false);
+  }
+};
+
 const CadasterContainer: React.FC = () => {
   const [departments, setDepartments] = React.useState<DepartmentsState>({
     data: [],
   });
+
   const [teachers, setTeachers] = React.useState<TearchersState>({
     data: [],
   });
+
   const [disciplines, setDisciplines] = React.useState<DisciplinesState>({
     data: [],
   });
   const [isShownModal, setIsShownModal] = React.useState<boolean>(false);
+
   const [currentPage, setCurrentPage] = React.useState<number>(0);
 
+  const [createOne] = useMutation<{collegiate: MemberCollegiateState[]}>(
+    CREATE_ONE_MEMBER_COLLEGIATE,
+  );
+  const [routes, setRoutes] = React.useState<Array<MenuSidebar>>(menus);
+
   const [memberCollegiate, setMemberCollegiate] =
-    React.useState<MemberCollegiateState>({
-      department: '',
-      discipline: [],
-      teacher: null,
-    });
+    React.useState<MemberCollegiateState>(initialData);
 
   React.useEffect(() => {
     getInitialData(setDepartments);
@@ -116,7 +153,7 @@ const CadasterContainer: React.FC = () => {
 
   return (
     <Cadaster
-      routes={menus}
+      routes={routes}
       departments={departments?.data}
       teachers={teachers?.data}
       disciplines={disciplines?.data}
@@ -128,7 +165,7 @@ const CadasterContainer: React.FC = () => {
           ...memberCollegiate,
           teacher: {
             teacherName: teachers?.data?.[param]?.nome,
-            siape: teachers?.data?.[param]?.siape,
+            siape: teachers?.data?.[param]?.siape.toString(),
           },
         })
       }
@@ -139,7 +176,21 @@ const CadasterContainer: React.FC = () => {
       onSelectDisciplines={(param: DisciplineType) =>
         onSelectDiscipline(param, memberCollegiate, setMemberCollegiate)
       }
-      onClickSave={() => collegiateService.createOne(memberCollegiate)}
+      onClickSave={() =>
+        submit(
+          createOne,
+          memberCollegiate,
+          setIsShownModal,
+          setMemberCollegiate,
+        )
+      }
+      onClickMenu={(param: number) =>
+        setRoutes(
+          routes.map((item, index) =>
+            index === param ? {...item, isActived: !item.isActived} : item,
+          ),
+        )
+      }
     />
   );
 };

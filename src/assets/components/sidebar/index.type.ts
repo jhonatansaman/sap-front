@@ -1,3 +1,7 @@
+export interface UIModifiers {
+  active?: boolean;
+}
+
 export interface Roles {
   idPessoaPapel: number;
   idPapel: number;
@@ -46,12 +50,18 @@ export interface StateRoles {
   data: APIResponseRoles | null;
 }
 
+export type SubRoute = {
+  name: string;
+};
 export interface MenuSidebar {
   label: string;
   icon: any;
+  subRoutes: Array<SubRoute>;
   iconActived?: any;
+  isActived: boolean;
 }
 export interface SidebarProps extends StateRoles {
   user: User;
   routes: Array<MenuSidebar>;
+  onClickMenu: (param: number) => void;
 }

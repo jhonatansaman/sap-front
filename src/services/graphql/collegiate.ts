@@ -1,18 +1,12 @@
 import React from 'react';
-import {gql} from '@apollo/react-hooks';
 import {graphqlService} from '../../config/client-graphql';
+import {gql, useMutation} from '@apollo/client';
 import {MemberCollegiateState} from '../../screens/containers/cadaster/index.type';
 
-class Collegiate {
-  createOne = (collegiate: MemberCollegiateState) => {
-    graphqlService.query({
-      query: gql`
-        createOne(
-          collegiate: ${collegiate}
-        )
-      `,
-    });
-  };
-}
-
-export const collegiateService = new Collegiate();
+export const CREATE_ONE_MEMBER_COLLEGIATE = gql`
+  mutation createOne($collegiate: CreateCollegiateInput!) {
+    createOne(collegiate: $collegiate) {
+      disciplineName
+    }
+  }
+`;
