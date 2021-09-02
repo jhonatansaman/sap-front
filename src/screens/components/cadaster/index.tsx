@@ -112,12 +112,6 @@ const Cadaster: React.FC<CadasterProps> = ({
 }) => {
   return (
     <Container>
-      {/* <Sidebar
-        user={user}
-        data={roles.data}
-        routes={routes}
-        onClickMenu={onClickMenu}
-      /> */}
       <Content>
         <Header />
         <MainContent>
