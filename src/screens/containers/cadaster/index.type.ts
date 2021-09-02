@@ -1,3 +1,5 @@
+import {MenuSidebar} from '../../../assets/components/sidebar/index.type';
+
 export interface Departments {
   codigo: string;
   nome: string;
@@ -162,4 +164,8 @@ export interface MemberCollegiateState {
   department: string;
   teacher: TeacherType | null;
   discipline: Array<DisciplineType>;
+}
+
+export interface CadasterContainerProps {
+  routes: Array<MenuSidebar>;
 }

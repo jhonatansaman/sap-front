@@ -1,14 +1,14 @@
 import {useMutation} from '@apollo/client';
 import React from 'react';
 import {MenuSidebar} from '../../../assets/components/sidebar/index.type';
-import IconCollegiate from '../../../assets/UIkit/icons/ico-collegiate.svg';
-import IconCollegiateActived from '../../../assets/UIkit/icons/ico-collegiate_actived.svg';
+
 import {alertService} from '../../../services/alert';
 import {cagrService} from '../../../services/cagr';
 import {CREATE_ONE_MEMBER_COLLEGIATE} from '../../../services/graphql/collegiate';
 import {getCurrentSemester} from '../../../utils/currentSemester';
 import Cadaster from '../../components/cadaster';
 import {
+  CadasterContainerProps,
   DepartmentsState,
   DisciplinesState,
   DisciplineType,
@@ -16,23 +16,6 @@ import {
   TeacherType,
   TearchersState,
 } from './index.type';
-
-const menus: Array<MenuSidebar> = [
-  {
-    label: 'Colegiado',
-    subRoutes: [{name: 'Cadastrar Plano'}],
-    icon: IconCollegiate,
-    iconActived: IconCollegiateActived,
-    isActived: false,
-  },
-  {
-    label: 'Eventos',
-    subRoutes: [{name: 'Cadastrar Feriados'}],
-    icon: IconCollegiate,
-    iconActived: IconCollegiateActived,
-    isActived: false,
-  },
-];
 
 const initialData: MemberCollegiateState = {
   department: '',
@@ -120,7 +103,7 @@ const submit = async (
   }
 };
 
-const CadasterContainer: React.FC = () => {
+const CadasterContainer: React.FC<CadasterContainerProps> = ({routes}) => {
   const [departments, setDepartments] = React.useState<DepartmentsState>({
     data: [],
   });
@@ -139,7 +122,6 @@ const CadasterContainer: React.FC = () => {
   const [createOne] = useMutation<{collegiate: MemberCollegiateState[]}>(
     CREATE_ONE_MEMBER_COLLEGIATE,
   );
-  const [routes, setRoutes] = React.useState<Array<MenuSidebar>>(menus);
 
   const [memberCollegiate, setMemberCollegiate] =
     React.useState<MemberCollegiateState>(initialData);
@@ -189,13 +171,6 @@ const CadasterContainer: React.FC = () => {
           memberCollegiate,
           setIsShownModal,
           setMemberCollegiate,
-        )
-      }
-      onClickMenu={(param: number) =>
-        setRoutes(
-          routes.map((item, index) =>
-            index === param ? {...item, isActived: !item.isActived} : item,
-          ),
         )
       }
     />

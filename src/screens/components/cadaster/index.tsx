@@ -96,8 +96,6 @@ const renderCards = (
     </CardDiscipline>
   ));
 
-const {user}: any = userService.getUserInfo();
-
 const Cadaster: React.FC<CadasterProps> = ({
   routes,
   departments,
@@ -111,18 +109,15 @@ const Cadaster: React.FC<CadasterProps> = ({
   onSelectDisciplines,
   onChangeTeacher,
   onClickSave,
-  onClickMenu,
 }) => {
-  const [roles] = useState<StateRoles>({data: userService.getRoles()});
-
   return (
     <Container>
-      <Sidebar
+      {/* <Sidebar
         user={user}
         data={roles.data}
         routes={routes}
         onClickMenu={onClickMenu}
-      />
+      /> */}
       <Content>
         <Header />
         <MainContent>
