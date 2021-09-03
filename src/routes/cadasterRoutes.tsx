@@ -6,6 +6,7 @@ import {userService} from '../services/user';
 import IconCollegiate from '../assets/UIkit/icons/ico-collegiate.svg';
 import IconCollegiateActived from '../assets/UIkit/icons/ico-collegiate_actived.svg';
 import CadasterContainer from '../screens/containers/cadaster';
+import {Content} from './styles';
 
 const menus: Array<MenuSidebar> = [
   {
@@ -33,7 +34,7 @@ const CadasterRoutes: React.FC = () => {
   console.log(path);
 
   return (
-    <React.Fragment>
+    <Content>
       <Sidebar
         user={user}
         data={roles.data}
@@ -51,7 +52,7 @@ const CadasterRoutes: React.FC = () => {
           <CadasterContainer routes={menus} />
         </Route>
       </Switch>
-    </React.Fragment>
+    </Content>
   );
 };
 
