@@ -132,6 +132,10 @@ const CadasterContainer: React.FC<CadasterContainerProps> = ({
   const {path}: any = useRouteMatch();
 
   React.useEffect(() => {
+    getInitialData(setDepartments);
+  }, []);
+
+  React.useEffect(() => {
     const changeRoutes = [...routes];
     changeRoutes.forEach((route, index) => {
       route.subRoutes.forEach(subRoute => {
