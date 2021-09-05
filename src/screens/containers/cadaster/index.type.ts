@@ -168,4 +168,5 @@ export interface MemberCollegiateState {
 
 export interface CadasterContainerProps {
   routes: Array<MenuSidebar>;
+  onChangeRoute: (param: Array<MenuSidebar>) => void;
 }

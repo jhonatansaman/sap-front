@@ -38,7 +38,7 @@ const items = [
     iconActived: Cadaster,
     iconDisabled: Cadaster,
     type: null,
-    route: '/cadaster',
+    route: '/cadaster/colegiado',
   },
 ];
 

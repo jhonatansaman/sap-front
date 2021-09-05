@@ -13,11 +13,9 @@ const modifiers = {
   containerMenu: {
     active: css`
       /* border-right: 1px solid ${colors.Main.divider}; */
-      /* border-left: 1px solid ${colors.Main.divider}; */
-      border-top: 1px solid ${colors.Main.divider};
-    `,
-    disabled: css`
-      border: 1px solid ${colors.Main.divider};
+      background: ${colors.Main.divider};
+      border-left: 4px solid ${colors.Primary.darkBlue};
+      /* border-top: 1px solid ${colors.Main.divider}; */
     `,
   },
 };
@@ -27,6 +25,7 @@ export const Container = styled.aside`
   width: 256px;
   display: flex;
   background: ${colors.Main.white};
+  opacity: 1px;
   flex-direction: column;
   border-right: 1px solid;
   border-color: ${colors.Main.divider};
@@ -138,24 +137,19 @@ export const Menu = styled.p<UIModifiers>`
   font-size: 13px;
   line-height: 19px;
   color: ${props =>
-    props.active ? colors.Main.primary500 : colors.Primary.darkBlue};
+    props.active ? colors.Primary.blue : colors.Primary.darkBlue};
   letter-spacing: 0.01em;
   margin-left: 15px;
 `;
 
 export const ContainerMenu = styled.div<UIModifiers>`
-  padding: 2px;
   height: 40px;
   display: flex;
   flex-direction: row;
-  border-radius: 4px;
   cursor: pointer;
   align-items: center;
 
-  ${props =>
-    props.active
-      ? modifiers.containerMenu.active
-      : modifiers.containerMenu.disabled}
+  ${props => props.active && modifiers.containerMenu.active}
 `;
 
 export const Left = styled.div`
@@ -254,14 +248,15 @@ export const SubMenuBox = styled.div`
   display: flex;
   align-items: flex-end;
   justify-content: flex-start;
-  border-radius: 4px;
   animation: ${fadeInAnimation} 0.5s;
-  border-bottom: 1px solid ${colors.Main.divider};
+  background: ${colors.Main.divider};
+  border-left: 4px solid ${colors.Primary.darkBlue};
 `;
 
 export const LI = styled.p`
-  color: ${colors.Primary.darkBlue};
+  color: ${colors.Primary.blue};
   font-size: 12px;
   font-family: Poppins;
   cursor: pointer;
+  margin-left: 10px;
 `;

@@ -21,6 +21,8 @@ import {
   UserName,
   UserNameBox,
 } from './styles';
+import {ReactComponent as Arrow} from '../../UIkit/icons/ico-arrow_right.svg';
+import colors from '../../UIkit/styles/colors';
 
 const renderSubMenus = (subMenus: Array<SubRoute>) =>
   subMenus.map(menu => (
@@ -39,12 +41,14 @@ const renderMenus = (
         active={menu.isActived}
         key={index.toString()}
         onClick={() => onClickMenu(index)}>
-        <IconBox>
-          <Image src={menu.icon} />
-        </IconBox>
+        <IconBox>{menu.isActived ? menu.iconActived() : menu.icon()}</IconBox>
         <Menu active={menu.isActived}>{menu.label}</Menu>
         <ArrowRightBox active={menu.isActived}>
-          <Image src={ArrowRight} />
+          <Arrow
+            fill={
+              menu.isActived ? colors.Primary.blue : colors.Primary.darkBlue
+            }
+          />
         </ArrowRightBox>
       </ContainerMenu>
       {menu.isActived &&

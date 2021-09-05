@@ -1,7 +1,7 @@
 import {useMutation} from '@apollo/client';
 import React from 'react';
+import {useRouteMatch} from 'react-router-dom';
 import {MenuSidebar} from '../../../assets/components/sidebar/index.type';
-
 import {alertService} from '../../../services/alert';
 import {cagrService} from '../../../services/cagr';
 import {CREATE_ONE_MEMBER_COLLEGIATE} from '../../../services/graphql/collegiate';
@@ -103,7 +103,10 @@ const submit = async (
   }
 };
 
-const CadasterContainer: React.FC<CadasterContainerProps> = ({routes}) => {
+const CadasterContainer: React.FC<CadasterContainerProps> = ({
+  routes,
+  onChangeRoute,
+}) => {
   const [departments, setDepartments] = React.useState<DepartmentsState>({
     data: [],
   });
@@ -126,9 +129,19 @@ const CadasterContainer: React.FC<CadasterContainerProps> = ({routes}) => {
   const [memberCollegiate, setMemberCollegiate] =
     React.useState<MemberCollegiateState>(initialData);
 
+  const {path}: any = useRouteMatch();
+
   React.useEffect(() => {
-    getInitialData(setDepartments);
-  }, []);
+    const changeRoutes = [...routes];
+    changeRoutes.forEach((route, index) => {
+      route.subRoutes.forEach(subRoute => {
+        if (subRoute.route === path) {
+          changeRoutes[index] = {...changeRoutes[index], isActived: true};
+        }
+      });
+    });
+    onChangeRoute(changeRoutes);
+  }, [routes]);
 
   React.useEffect(() => {
     getInitialDataByDepartment(

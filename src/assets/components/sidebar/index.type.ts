@@ -52,6 +52,7 @@ export interface StateRoles {
 
 export type SubRoute = {
   name: string;
+  route: string;
 };
 export interface MenuSidebar {
   label: string;
