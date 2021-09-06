@@ -1,14 +1,11 @@
-import React, {useState} from 'react';
+import React from 'react';
 import Button from '../../../assets/components/button';
 import MainCard from '../../../assets/components/card';
 import Header from '../../../assets/components/header';
 import Modal from '../../../assets/components/modal';
 import Paginator from '../../../assets/components/paginator';
-import Sidebar from '../../../assets/components/sidebar';
-import {StateRoles} from '../../../assets/components/sidebar/index.type';
 import Table from '../../../assets/components/table';
 import {TableRow, TD} from '../../../assets/components/table/styles';
-import {userService} from '../../../services/user';
 import {
   APIResponseDisciplines,
   Departments,

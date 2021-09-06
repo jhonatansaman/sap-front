@@ -7,6 +7,7 @@ import {
   Container,
   ContainerMenu,
   Content,
+  ContentMenu,
   Email,
   IconBox,
   Image,
@@ -23,20 +24,31 @@ import {
 } from './styles';
 import {ReactComponent as Arrow} from '../../UIkit/icons/ico-arrow_right.svg';
 import colors from '../../UIkit/styles/colors';
+import {
+  RouteComponentProps,
+  useRouteMatch,
+  withRouter,
+  useHistory,
+} from 'react-router-dom';
 
-const renderSubMenus = (subMenus: Array<SubRoute>) =>
-  subMenus.map(menu => (
-    <SubMenuBox onClick={() => false}>
-      <LI>- {menu.name}</LI>
+const renderSubMenus = (
+  subMenus: Array<SubRoute>,
+  routeIndex: number,
+  onClickSubMenu: (indexRoute: number, indexSubRoute: number) => void,
+) =>
+  subMenus.map((menu, indexSubRoute) => (
+    <SubMenuBox onClick={() => onClickSubMenu(routeIndex, indexSubRoute)}>
+      <LI active={menu.isActived}>- {menu.name}</LI>
     </SubMenuBox>
   ));
 
 const renderMenus = (
   routes: Array<MenuSidebar>,
   onClickMenu: (param: number) => void,
+  onClickSubMenu: (indeRoute: number, indexSubRoute: number) => void,
 ) =>
   routes?.map((menu, index) => (
-    <div style={{marginBottom: 5}}>
+    <ContentMenu>
       <ContainerMenu
         active={menu.isActived}
         key={index.toString()}
@@ -53,30 +65,38 @@ const renderMenus = (
       </ContainerMenu>
       {menu.isActived &&
         menu.subRoutes.length &&
-        renderSubMenus(menu.subRoutes)}
-    </div>
+        renderSubMenus(menu.subRoutes, index, onClickSubMenu)}
+    </ContentMenu>
   ));
 
 const renderRoles = (roles: Array<Roles> | undefined) =>
   roles?.map(role => <Link href="#">{role.nome}</Link>);
 
-const Sidebar: React.FC<SidebarProps> = ({user, data, routes, onClickMenu}) => (
-  <Container>
-    <TitleBox>
-      <Title>UFSC - Cadastros</Title>
-    </TitleBox>
-    <Content>
-      <UserBox>
-        <ImageBox>
-          <Image src="https://w7.pngwing.com/pngs/340/946/png-transparent-avatar-user-computer-icons-software-developer-avatar-child-face-heroes.png" />
-        </ImageBox>
-        <UserNameBox>
-          <UserName>{capitalize(user.nome)}</UserName>
-          <Email>{user.email}</Email>
-        </UserNameBox>
-      </UserBox>
-    </Content>
-    {renderMenus(routes, onClickMenu)}
-  </Container>
-);
-export default Sidebar;
+const Sidebar: React.FC<SidebarProps & RouteComponentProps> = ({
+  user,
+  data,
+  routes,
+  onClickMenu,
+  onClickSubMenu,
+}) => {
+  return (
+    <Container>
+      <TitleBox>
+        <Title>UFSC - Cadastros</Title>
+      </TitleBox>
+      <Content>
+        <UserBox>
+          <ImageBox>
+            <Image src="https://w7.pngwing.com/pngs/340/946/png-transparent-avatar-user-computer-icons-software-developer-avatar-child-face-heroes.png" />
+          </ImageBox>
+          <UserNameBox>
+            <UserName>{capitalize(user.nome)}</UserName>
+            <Email>{user.email}</Email>
+          </UserNameBox>
+        </UserBox>
+      </Content>
+      {renderMenus(routes, onClickMenu, onClickSubMenu)}
+    </Container>
+  );
+};
+export default withRouter(Sidebar);

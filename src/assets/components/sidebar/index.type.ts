@@ -1,3 +1,5 @@
+import {RouteProps} from 'react-router';
+
 export interface UIModifiers {
   active?: boolean;
 }
@@ -53,6 +55,7 @@ export interface StateRoles {
 export type SubRoute = {
   name: string;
   route: string;
+  isActived: boolean;
 };
 export interface MenuSidebar {
   label: string;
@@ -65,4 +68,5 @@ export interface SidebarProps extends StateRoles {
   user: User;
   routes: Array<MenuSidebar>;
   onClickMenu: (param: number) => void;
+  onClickSubMenu: (indeRoute: number, indexSubRoute: number) => void;
 }

@@ -253,10 +253,13 @@ export const SubMenuBox = styled.div`
   border-left: 4px solid ${colors.Primary.darkBlue};
 `;
 
-export const LI = styled.p`
-  color: ${colors.Primary.blue};
+export const LI = styled.p<UIModifiers>`
+  color: ${props =>
+    props.active ? colors.Primary.blue : colors.Primary.darkBlue};
   font-size: 12px;
   font-family: Poppins;
   cursor: pointer;
   margin-left: 10px;
 `;
+
+export const ContentMenu = styled.div``;

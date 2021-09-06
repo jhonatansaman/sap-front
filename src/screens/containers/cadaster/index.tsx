@@ -1,7 +1,6 @@
-import {useMutation} from '@apollo/client';
 import React from 'react';
+import {useMutation} from '@apollo/client';
 import {useRouteMatch} from 'react-router-dom';
-import {MenuSidebar} from '../../../assets/components/sidebar/index.type';
 import {alertService} from '../../../services/alert';
 import {cagrService} from '../../../services/cagr';
 import {CREATE_ONE_MEMBER_COLLEGIATE} from '../../../services/graphql/collegiate';
@@ -13,7 +12,6 @@ import {
   DisciplinesState,
   DisciplineType,
   MemberCollegiateState,
-  TeacherType,
   TearchersState,
 } from './index.type';
 

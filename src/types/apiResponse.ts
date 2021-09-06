@@ -10,3 +10,25 @@ export interface MemberCollegiate {
   teacherName: string;
   department: string;
 }
+
+export interface LoginUser {
+  user: APIResponseAuth;
+  accessToken: string;
+}
+export interface APIResponseAuth {
+  mensagem: string;
+  erro: boolean;
+  tipo: string;
+  matricula: number;
+  nome: string;
+  dataNascimento: string;
+  pais: string;
+  cpf: string;
+  email: string;
+  curso: string;
+  centro: string;
+  codigoCurso: number;
+  siape: number;
+  serpro: number;
+  idPessoa: number;
+}
