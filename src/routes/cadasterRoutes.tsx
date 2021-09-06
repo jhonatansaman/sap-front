@@ -16,6 +16,7 @@ import colors from '../assets/UIkit/styles/colors';
 import {LoginUser} from '../types/apiResponse';
 import {History} from 'history';
 import ListMemberCollegiate from '../screens/containers/ListMemberCollegiate';
+
 const menus: Array<MenuSidebar> = [
   {
     label: 'Colegiado',

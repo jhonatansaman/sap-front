@@ -12,10 +12,8 @@ const modifiers = {
   },
   containerMenu: {
     active: css`
-      /* border-right: 1px solid ${colors.Main.divider}; */
-      background: ${colors.Main.divider};
+      background: ${colors.Primary.blueOpacity};
       border-left: 4px solid ${colors.Primary.darkBlue};
-      /* border-top: 1px solid ${colors.Main.divider}; */
     `,
   },
 };
@@ -249,7 +247,7 @@ export const SubMenuBox = styled.div`
   align-items: flex-end;
   justify-content: flex-start;
   animation: ${fadeInAnimation} 0.5s;
-  background: ${colors.Main.divider};
+  background: ${colors.Primary.blueOpacity};
   border-left: 4px solid ${colors.Primary.darkBlue};
 `;
 

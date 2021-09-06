@@ -13,6 +13,7 @@ const colors = {
     darkBlue: '#334D6E',
     table_gray: '#707683',
     accent_blue: '#109CF1',
+    blueOpacity: '#F2F9FF',
   },
 };
 
