@@ -90,6 +90,7 @@ export const Button = styled.button`
   border-width: 0px;
   border-radius: 5px;
   width: 100%;
+  cursor: pointer;
 `;
 
 export const ContentHeader = styled.div`

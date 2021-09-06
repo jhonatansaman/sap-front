@@ -34,10 +34,15 @@ import {
 const renderSubMenus = (
   subMenus: Array<SubRoute>,
   routeIndex: number,
-  onClickSubMenu: (indexRoute: number, indexSubRoute: number) => void,
+  onClickSubMenu: (
+    indexRoute: number,
+    indexSubRoute: number,
+    routeName: string,
+  ) => void,
 ) =>
   subMenus.map((menu, indexSubRoute) => (
-    <SubMenuBox onClick={() => onClickSubMenu(routeIndex, indexSubRoute)}>
+    <SubMenuBox
+      onClick={() => onClickSubMenu(routeIndex, indexSubRoute, menu.route)}>
       <LI active={menu.isActived}>- {menu.name}</LI>
     </SubMenuBox>
   ));
@@ -45,7 +50,11 @@ const renderSubMenus = (
 const renderMenus = (
   routes: Array<MenuSidebar>,
   onClickMenu: (param: number) => void,
-  onClickSubMenu: (indeRoute: number, indexSubRoute: number) => void,
+  onClickSubMenu: (
+    indeRoute: number,
+    indexSubRoute: number,
+    routeName: string,
+  ) => void,
 ) =>
   routes?.map((menu, index) => (
     <ContentMenu>

@@ -1,5 +1,11 @@
 import React, {useState} from 'react';
-import {Switch, Route, useRouteMatch, RouteProps} from 'react-router-dom';
+import {
+  Switch,
+  Route,
+  useRouteMatch,
+  RouteProps,
+  useHistory,
+} from 'react-router-dom';
 import Sidebar from '../assets/components/sidebar';
 import {MenuSidebar, StateRoles} from '../assets/components/sidebar/index.type';
 import {userService} from '../services/user';
@@ -8,7 +14,8 @@ import CadasterContainer from '../screens/containers/cadaster';
 import {Content} from './styles';
 import colors from '../assets/UIkit/styles/colors';
 import {LoginUser} from '../types/apiResponse';
-
+import {History} from 'history';
+import ListMemberCollegiate from '../screens/containers/ListMemberCollegiate';
 const menus: Array<MenuSidebar> = [
   {
     label: 'Colegiado',
@@ -46,17 +53,20 @@ const changeSubRoute = (
   setRoutes: (param: Array<MenuSidebar>) => void,
   routeKey: number,
   subRouteKey: number,
+  routeName: string,
+  history: History,
 ) => {
   const changeRoutes: Array<MenuSidebar> = [...routes];
   changeRoutes?.forEach((route, routeIndex) => {
     route.subRoutes.forEach((subRoute, subRouteIndex) => {
       if (routeIndex === routeKey && subRouteIndex === subRouteKey) {
-        subRoute.isActived = !subRoute.isActived;
-      } else {
-        subRoute.isActived = false;
+        return (subRoute.isActived = !subRoute.isActived);
       }
+
+      return (subRoute.isActived = false);
     });
 
+    history.push(routeName);
     setRoutes(changeRoutes);
   });
 };
@@ -68,6 +78,7 @@ const CadasterRoutes: React.FC = () => {
   const routeMatch: string | Array<string> | RouteProps<string> =
     useRouteMatch();
 
+  const history = useHistory();
   return (
     <Content>
       <Sidebar
@@ -81,8 +92,19 @@ const CadasterRoutes: React.FC = () => {
             ),
           )
         }
-        onClickSubMenu={(routeKey: number, subRouteKey: number) =>
-          changeSubRoute(routes, setRoutes, routeKey, subRouteKey)
+        onClickSubMenu={(
+          routeKey: number,
+          subRouteKey: number,
+          routeName: string,
+        ) =>
+          changeSubRoute(
+            routes,
+            setRoutes,
+            routeKey,
+            subRouteKey,
+            routeName,
+            history,
+          )
         }
       />
       <Switch>
@@ -91,6 +113,9 @@ const CadasterRoutes: React.FC = () => {
             routes={menus}
             onChangeRoute={(param: Array<MenuSidebar>) => setRoutes(param)}
           />
+        </Route>
+        <Route path={`${routeMatch.path}/listar-membros`}>
+          <ListMemberCollegiate />
         </Route>
       </Switch>
     </Content>

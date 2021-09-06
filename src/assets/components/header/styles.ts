@@ -13,6 +13,39 @@ export const Container = styled.div`
 
 export const Text = styled.div`
   font-size: 14px;
-  color: ${colors.Primary.table_gray};
+  color: ${colors.Primary.darkBlue};
   font-family: Poppins;
+`;
+
+export const SearchBox = styled.div`
+  display: flex;
+`;
+
+export const TextSearch = styled.p`
+  margin: 0;
+  font-family: Poppins;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 12px;
+  line-height: 18px;
+  letter-spacing: 0.01em;
+  color: ${colors.Primary.gray};
+  margin-left: 15px;
+`;
+
+export const Input = styled.input`
+  border: 0;
+  &:focus {
+    outline: none;
+  }
+  &::placeholder {
+    font-family: Poppins;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 14px;
+    line-height: 18px;
+    letter-spacing: 0.01em;
+    color: ${colors.Primary.gray};
+  }
+  margin-left: 15px;
 `;

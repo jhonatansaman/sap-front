@@ -188,6 +188,7 @@ const CadasterContainer: React.FC<CadasterContainerProps> = ({
           setMemberCollegiate,
         )
       }
+      onSearchChange={(param: string) => console.log(param)}
     />
   );
 };

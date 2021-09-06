@@ -1,9 +1,22 @@
-import React from 'react';
-import {Container, Text} from './styles';
-
-const Header: React.FC = () => (
+import React, {ChangeEvent} from 'react';
+import {HeaderProps} from './index.type';
+import {Container, Text, SearchBox, TextSearch, Input} from './styles';
+import {ReactComponent as SearchIcon} from '../../UIkit/icons/ico-search.svg';
+const Header: React.FC<HeaderProps> = ({title, onChange}) => (
   <Container>
-    <Text>Membro do Colegiado</Text>
+    {onChange ? (
+      <SearchBox>
+        <SearchIcon />
+        <Input
+          placeholder="Digite para pesquisar"
+          onChange={(event: ChangeEvent<HTMLInputElement>) =>
+            onChange(event.target.value)
+          }
+        />
+      </SearchBox>
+    ) : (
+      <Text>{title}</Text>
+    )}
   </Container>
 );
 

@@ -98,19 +98,20 @@ const Cadaster: React.FC<CadasterProps> = ({
   departments,
   teachers,
   disciplines,
-  onChangeDepartment,
   isShownModal,
   currentPage,
-  setCurrentPage,
   selectedDisciplines,
+  onChangeDepartment,
+  setCurrentPage,
   onSelectDisciplines,
   onChangeTeacher,
   onClickSave,
+  onSearchChange,
 }) => {
   return (
     <Container>
       <Content>
-        <Header />
+        <Header title="Membro do colegiado" />
         <MainContent>
           <MainCard>
             <Line>

@@ -68,5 +68,9 @@ export interface SidebarProps extends StateRoles {
   user: User;
   routes: Array<MenuSidebar>;
   onClickMenu: (param: number) => void;
-  onClickSubMenu: (indeRoute: number, indexSubRoute: number) => void;
+  onClickSubMenu: (
+    indeRoute: number,
+    indexSubRoute: number,
+    routeName: string,
+  ) => void;
 }
