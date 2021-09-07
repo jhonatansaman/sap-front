@@ -12,7 +12,6 @@ const ListMemberCollegiateContainer: React.FC = () => {
 
   const {loading, data} = useQuery<GetCollegiateT>(GET_COLLEGIATE_PLANS);
 
-  console.log(data?.collegiate);
   React.useEffect(() => {
     setPlans({data: data?.collegiate});
   }, []);
