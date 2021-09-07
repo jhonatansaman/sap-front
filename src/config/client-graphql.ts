@@ -10,7 +10,7 @@ const uri =
     ? process.env.REACT_APP_API_URL
     : process.env.REACT_APP_API_LOCAL;
 
-const httpLink = new HttpLink({uri: uri});
+const httpLink = new HttpLink({uri: uri + '/graphql'});
 
 export const graphqlService = new ApolloClient<NormalizedCacheObject>({
   cache: new InMemoryCache(),
