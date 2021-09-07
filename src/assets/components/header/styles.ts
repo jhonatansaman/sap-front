@@ -19,6 +19,7 @@ export const Text = styled.div`
 
 export const SearchBox = styled.div`
   display: flex;
+  align-items: center;
 `;
 
 export const TextSearch = styled.p`
@@ -35,6 +36,12 @@ export const TextSearch = styled.p`
 
 export const Input = styled.input`
   border: 0;
+  font-weight: normal;
+  font-size: 14px;
+  line-height: 18px;
+  letter-spacing: 0.01em;
+  width: 200px;
+  color: ${colors.Primary.gray};
   &:focus {
     outline: none;
   }
