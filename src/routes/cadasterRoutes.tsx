@@ -30,7 +30,7 @@ const menus: Array<MenuSidebar> = [
     ],
     icon: () => <IconCollegiate fill={colors.Primary.darkBlue} />,
     iconActived: () => <IconCollegiate fill={colors.Primary.blue} />,
-    isActived: false,
+    isActived: true,
   },
   {
     label: 'Eventos',
@@ -80,6 +80,9 @@ const CadasterRoutes: React.FC = () => {
     useRouteMatch();
 
   const history = useHistory();
+
+  console.log(routes);
+
   return (
     <Content>
       <Sidebar
@@ -89,7 +92,9 @@ const CadasterRoutes: React.FC = () => {
         onClickMenu={(param: number) =>
           setRoutes(
             routes.map((item, index) =>
-              index === param ? {...item, isActived: !item.isActived} : item,
+              index === param
+                ? {...item, isActived: !item.isActived}
+                : {...item, isActived: false},
             ),
           )
         }
