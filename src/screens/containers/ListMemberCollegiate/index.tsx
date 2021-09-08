@@ -9,7 +9,7 @@ const ListMemberCollegiateContainer: React.FC = () => {
   const [plans, setPlans] = React.useState<PlanStateT>({
     data: null,
   });
-  const {loading, data, refetch} = useQuery<GetCollegiateT>(
+  const {loading, data, error, refetch} = useQuery<GetCollegiateT>(
     GET_COLLEGIATE_PLANS,
     {},
   );
