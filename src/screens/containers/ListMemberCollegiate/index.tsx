@@ -9,12 +9,15 @@ const ListMemberCollegiateContainer: React.FC = () => {
   const [plans, setPlans] = React.useState<PlanStateT>({
     data: null,
   });
-
-  const {loading, data} = useQuery<GetCollegiateT>(GET_COLLEGIATE_PLANS);
+  const {loading, data, refetch} = useQuery<GetCollegiateT>(
+    GET_COLLEGIATE_PLANS,
+    {},
+  );
 
   React.useEffect(() => {
+    refetch();
     setPlans({data: data?.collegiate});
-  }, []);
+  }, [data]);
 
   return <ListMemberCollegiate isLoading={loading} data={plans?.data} />;
 };
