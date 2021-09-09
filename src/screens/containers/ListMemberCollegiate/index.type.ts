@@ -1,9 +1,9 @@
 import {MemberCollegiate} from '../../../types/apiResponse';
 
 export interface PlanStateT {
-  data: any;
+  data: Array<MemberCollegiate> | undefined;
 }
 
 export interface GetCollegiateT {
-  collegiate: any;
+  collegiate: Array<MemberCollegiate>;
 }

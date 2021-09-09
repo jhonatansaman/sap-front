@@ -97,7 +97,6 @@ const submit = async (
     setMemberCollegiate(initialData);
     alertService.success('Plano cadastrado com sucesso!');
   } catch (error) {
-    console.log(error);
     setIsShownModal(false);
   }
 };

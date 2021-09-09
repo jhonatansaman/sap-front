@@ -30,32 +30,36 @@ const ListMemberCollegiate: React.FC<ListCollegiateMemberProps> = ({
   onHandleSearchPlan,
   currentPage,
   onChangeCurrentPage,
-}) => (
-  <Container>
-    <Header onChange={onHandleSearchPlan} />
-    <MainContent>
-      <MainCard>
-        <TableComponent
-          tableHeaders={['Professor', 'Siape', 'Departamento', 'Disciplina']}
-          renderRows={renderPlans(
-            data?.slice(
-              currentPage * Number(process.env.REACT_APP_CONST_ITEMS_PER_PAGE),
-              Number(process.env.REACT_APP_CONST_ITEMS_PER_PAGE) *
-                (currentPage + 1),
-            ),
-          )}
-        />
-        <PaginatorBox>
-          <Paginator
-            pages={data?.length / 7}
-            action={param => onChangeCurrentPage(param)}
-            currentPage={currentPage}
+}) => {
+  const plans = data as Array<MemberCollegiate>;
+  return (
+    <Container>
+      <Header onChange={onHandleSearchPlan} />
+      <MainContent>
+        <MainCard>
+          <TableComponent
+            tableHeaders={['Professor', 'Siape', 'Departamento', 'Disciplina']}
+            renderRows={renderPlans(
+              data?.slice(
+                currentPage *
+                  Number(process.env.REACT_APP_CONST_ITEMS_PER_PAGE),
+                Number(process.env.REACT_APP_CONST_ITEMS_PER_PAGE) *
+                  (currentPage + 1),
+              ),
+            )}
           />
-        </PaginatorBox>
-      </MainCard>
-    </MainContent>
-    {isLoading && <LoadingModal />}
-  </Container>
-);
+          <PaginatorBox>
+            <Paginator
+              pages={Math.round(plans?.length / 7)}
+              action={param => onChangeCurrentPage(param)}
+              currentPage={currentPage}
+            />
+          </PaginatorBox>
+        </MainCard>
+      </MainContent>
+      {isLoading && <LoadingModal />}
+    </Container>
+  );
+};
 
 export default ListMemberCollegiate;
