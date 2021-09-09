@@ -18,3 +18,14 @@ export const GET_COLLEGIATE_PLANS = gql`
     }
   }
 `;
+
+export const GET_PLANS_BY_QUERY = gql`
+  query GetCollegiate($query: String!) {
+    getPlanByQuery(query: $query) {
+      teacherName
+      siape
+      department
+      disciplineName
+    }
+  }
+`;

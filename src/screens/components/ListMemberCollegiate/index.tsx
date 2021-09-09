@@ -26,9 +26,10 @@ const renderPlans = (plans: Array<MemberCollegiate> | null | undefined) =>
 const ListMemberCollegiate: React.FC<ListCollegiateMemberProps> = ({
   data,
   isLoading,
+  onHandleSearchPlan,
 }) => (
   <Container>
-    <Header onChange={param => console.log(param)} />
+    <Header onChange={onHandleSearchPlan} />
     <MainContent>
       <MainCard>
         <TableComponent
