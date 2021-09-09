@@ -25,8 +25,14 @@ const ListMemberCollegiateContainer: React.FC = () => {
   const [search, setSearch] = React.useState<string>('');
 
   React.useEffect(() => {
-    executeSearch({variables: {query: search}});
-    setPlans({data: get?.data?.getPlanByQuery});
+    if (search !== '') {
+      get.refetch;
+      executeSearch({variables: {query: search}});
+      setPlans({data: get?.data?.getPlanByQuery});
+    } else {
+      refetch();
+      setPlans({data: data?.collegiate});
+    }
   }, [search]);
 
   React.useEffect(() => {
