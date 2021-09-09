@@ -9,13 +9,12 @@ import ListMemberCollegiate from '../../components/ListMemberCollegiate';
 import {GetCollegiateT, PlanStateT} from './index.type';
 
 const onSearchCollegiate = (param: string, executeSearch: any) => {
-  console.log(param);
   executeSearch({variables: {query: param}});
 };
 
 const ListMemberCollegiateContainer: React.FC = () => {
   const [plans, setPlans] = React.useState<PlanStateT>({
-    data: null,
+    data: [],
   });
   const {loading, data, refetch} = useQuery<GetCollegiateT>(
     GET_COLLEGIATE_PLANS,
@@ -23,6 +22,7 @@ const ListMemberCollegiateContainer: React.FC = () => {
   );
   const [executeSearch, get] = useLazyQuery(GET_PLANS_BY_QUERY);
   const [search, setSearch] = React.useState<string>('');
+  const [currentPage, setCurrentPage] = React.useState<number>(0);
 
   React.useEffect(() => {
     if (search !== '') {
@@ -44,6 +44,8 @@ const ListMemberCollegiateContainer: React.FC = () => {
     <ListMemberCollegiate
       isLoading={loading}
       data={plans?.data}
+      currentPage={currentPage}
+      onChangeCurrentPage={(param: number) => setCurrentPage(param)}
       onHandleSearchPlan={(param: string) => setSearch(param)}
     />
   );
