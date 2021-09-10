@@ -4,6 +4,7 @@ export interface AuthProps {
 }
 
 export interface MemberCollegiate {
+  id: string;
   siape: string;
   disciplineName: string;
   disciplineCode: string;

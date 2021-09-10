@@ -7,4 +7,5 @@ export interface ListCollegiateMemberProps extends PlanStateT {
   onHandleSearchPlan: (param: string) => void;
   currentPage: number;
   onChangeCurrentPage: (param: number) => void;
+  onClickToRemove: (param: string) => void;
 }

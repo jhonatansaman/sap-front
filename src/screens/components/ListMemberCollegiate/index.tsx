@@ -12,7 +12,10 @@ import {Container} from './styles';
 
 const SIZE_TD = 100;
 
-const renderPlans = (plans: Array<MemberCollegiate> | null | undefined) =>
+const renderPlans = (
+  plans: Array<MemberCollegiate> | null | undefined,
+  onDelete: (param: string) => void,
+) =>
   plans?.map(plan => (
     <React.Fragment>
       <TableRow>
@@ -20,6 +23,12 @@ const renderPlans = (plans: Array<MemberCollegiate> | null | undefined) =>
         <TD width={SIZE_TD}>{plan.siape}</TD>
         <TD width={SIZE_TD}>{plan.department}</TD>
         <TD width={SIZE_TD}>{plan.disciplineName}</TD>
+        <TD
+          width={SIZE_TD}
+          style={{cursor: 'pointer', fontSize: 22}}
+          onClick={() => onDelete(plan.id)}>
+          <p style={{margin: 0, marginLeft: 10}}>X</p>
+        </TD>
       </TableRow>
     </React.Fragment>
   ));
@@ -30,6 +39,7 @@ const ListMemberCollegiate: React.FC<ListCollegiateMemberProps> = ({
   onHandleSearchPlan,
   currentPage,
   onChangeCurrentPage,
+  onClickToRemove,
 }) => {
   const plans = data as Array<MemberCollegiate>;
   return (
@@ -38,7 +48,13 @@ const ListMemberCollegiate: React.FC<ListCollegiateMemberProps> = ({
       <MainContent>
         <MainCard>
           <TableComponent
-            tableHeaders={['Professor', 'Siape', 'Departamento', 'Disciplina']}
+            tableHeaders={[
+              'Professor',
+              'Siape',
+              'Departamento',
+              'Disciplina',
+              'Ações',
+            ]}
             renderRows={renderPlans(
               data?.slice(
                 currentPage *
@@ -46,6 +62,7 @@ const ListMemberCollegiate: React.FC<ListCollegiateMemberProps> = ({
                 Number(process.env.REACT_APP_CONST_ITEMS_PER_PAGE) *
                   (currentPage + 1),
               ),
+              onClickToRemove,
             )}
           />
           <PaginatorBox>

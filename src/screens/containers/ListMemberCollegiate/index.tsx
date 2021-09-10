@@ -1,15 +1,23 @@
-import {useLazyQuery, useQuery} from '@apollo/client';
 import React from 'react';
+import {useLazyQuery, useQuery} from '@apollo/client';
 import {
   GET_COLLEGIATE_PLANS,
   GET_PLANS_BY_QUERY,
 } from '../../../services/graphql/collegiate';
-import {MemberCollegiate} from '../../../types/apiResponse';
 import ListMemberCollegiate from '../../components/ListMemberCollegiate';
 import {GetCollegiateT, PlanStateT} from './index.type';
+import {alertService} from '../../../services/alert';
+import {collegiateService} from '../../../services/collegiate';
 
-const onSearchCollegiate = (param: string, executeSearch: any) => {
-  executeSearch({variables: {query: param}});
+const deleteCollegiate = async (
+  id: string,
+  setPlans: (param: PlanStateT) => void,
+) => {
+  try {
+    const {data} = await collegiateService.deleteCollegiate(id);
+    setPlans({data});
+    alertService.success('Deletado com sucesso');
+  } catch (err) {}
 };
 
 const ListMemberCollegiateContainer: React.FC = () => {
@@ -47,6 +55,7 @@ const ListMemberCollegiateContainer: React.FC = () => {
       currentPage={currentPage}
       onChangeCurrentPage={(param: number) => setCurrentPage(param)}
       onHandleSearchPlan={(param: string) => setSearch(param)}
+      onClickToRemove={(param: string) => deleteCollegiate(param, setPlans)}
     />
   );
 };

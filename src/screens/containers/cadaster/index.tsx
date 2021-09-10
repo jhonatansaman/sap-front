@@ -162,7 +162,14 @@ const CadasterContainer: React.FC<CadasterContainerProps> = ({
       teachers={teachers?.data}
       disciplines={disciplines?.data}
       onChangeDepartment={(param: string) =>
-        setMemberCollegiate({...memberCollegiate, department: param})
+        setMemberCollegiate({
+          ...memberCollegiate,
+          department: param,
+          teacher: {
+            teacherName: teachers?.data?.[0].nome,
+            siape: teachers?.data?.[0]?.siape.toString(),
+          },
+        })
       }
       onChangeTeacher={(param: number) =>
         setMemberCollegiate({

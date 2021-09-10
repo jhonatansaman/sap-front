@@ -11,6 +11,7 @@ export const CREATE_ONE_MEMBER_COLLEGIATE = gql`
 export const GET_COLLEGIATE_PLANS = gql`
   query GetCollegiate {
     collegiate {
+      id
       teacherName
       siape
       department
@@ -22,6 +23,7 @@ export const GET_COLLEGIATE_PLANS = gql`
 export const GET_PLANS_BY_QUERY = gql`
   query GetCollegiate($query: String!) {
     getPlanByQuery(query: $query) {
+      id
       teacherName
       siape
       department
